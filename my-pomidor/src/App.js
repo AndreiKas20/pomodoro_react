@@ -1,15 +1,10 @@
-import {Content} from "./Content";
-import {Header} from "./Header";
+import {Layout} from "./Layout";
 
 
 function App() {
     console.log('render App')
     return (
-        <div className="App">
-            <Content></Content>
-            <Header></Header>
-
-        </div>
+        <Layout/>
     );
 }
 
