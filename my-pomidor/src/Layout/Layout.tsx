@@ -5,7 +5,7 @@ import './layout.css'
 
 export function Layout() {
     return (
-        <div className='head' >
+        <div className='layout' >
             <Header></Header>
             <Content></Content>
         </div>

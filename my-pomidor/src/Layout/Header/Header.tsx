@@ -1,12 +1,18 @@
 import React from 'react';
 import {Icon} from "../../UI/Icon";
-import styles from './header.css'
+import './header.css'
 
 export function Header() {
-  console.log('render Header')
+    console.log('render Header')
     return (
-        <div className={styles.head}>
-          <Icon nameIcon={'IconStatistic'}></Icon>
+        <div className='block'>
+            <div className='iconPomidor'>
+                <Icon nameIcon={'IconPomidor'}></Icon>
+            </div>
+            <button className='linkStatistic'>
+                <Icon nameIcon={'IconStatistic'}></Icon>
+                Статистика
+            </button>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import {Layout} from "./Layout";
+import './main.global.css'
 
 
 function App() {

@@ -1,3 +1,6 @@
-.head {
-    background-color: black;
+.block {
+    display: flex;
+}
+.iconPomidor {
+    margin-right: auto;
 }
