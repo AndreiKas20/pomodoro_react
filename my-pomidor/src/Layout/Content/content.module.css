@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 80px;
+}
+
+.leftBlock {
+    max-width: 508px;
+}

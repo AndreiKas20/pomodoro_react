@@ -1,0 +1,6 @@
+.item {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 33px;
+    color: var(--black);
+}

@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './contenttimerblock.css';
+import {Timer} from "./Timer";
 
 export function ContentTimerBlock() {
-  return (
-
-  );
+    return (
+        <Timer></Timer>
+    );
 }
