@@ -1,0 +1,9 @@
+.input {
+    padding: 19px 15px;
+    background-color: var(--whiteF4);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+    max-width: 370px;
+}
