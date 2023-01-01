@@ -250,10 +250,6 @@
   font-style: italic;
 }
 
-
-
-
-
 :root {
   --black:          #333333;
   --red22:          #DC3E22;
@@ -306,4 +302,15 @@ button {
   border: 0;
   background: transparent;
   cursor: pointer;
+}
+
+input {
+  border: none;
+}
+
+button{
+  transition: transform .2s ease-in-out;
+}
+button:hover{
+  transform: scale(1.065);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ItemDescription} from "./ItemDescription";
 import {generateRandomString} from "../../../../utils/getRandomString";
-
+import styles from './listdescription.module.css'
 export function ListDescription() {
     const listArr: Array<string> = [
         'Выберите категорию и напишите название текущей задачи',
@@ -11,7 +11,7 @@ export function ListDescription() {
         'Продолжайте работать «помидор» за «помидором», пока задача не будут выполнена. Каждые 4 «помидора» делайте длинный перерыв (15-30 минут)'
     ]
     return (
-        <ul>
+        <ul className={styles.list}>
           {
             listArr.map(value => <ItemDescription item={value} key={generateRandomString()} />)
           }

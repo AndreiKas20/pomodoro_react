@@ -1,0 +1,23 @@
+.block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.blockTask {
+    margin-bottom: 30px;
+}
+
+.blockBtn {
+    display: flex;
+}
+
+.btnLeft{
+    margin-right: 25px;
+}
+
+.btnPlus {
+    position: absolute;
+    right: -100px;
+    top: 70px;
+}

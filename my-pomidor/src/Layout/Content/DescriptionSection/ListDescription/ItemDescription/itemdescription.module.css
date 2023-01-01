@@ -1,6 +1,19 @@
 .item {
+    position: relative;
+    padding-left: 23px;
     font-weight: 400;
     font-size: 16px;
     line-height: 33px;
     color: var(--black);
+}
+
+.item:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    background-color: var(--red0F);
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
 }

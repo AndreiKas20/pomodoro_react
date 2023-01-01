@@ -2,4 +2,5 @@
     display: flex;
     padding: 19px 40px;
     justify-content: space-between;
+    background-color: var(--greyC4);
 }

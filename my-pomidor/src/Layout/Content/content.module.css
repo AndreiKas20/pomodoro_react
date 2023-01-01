@@ -7,3 +7,7 @@
 .leftBlock {
     max-width: 508px;
 }
+
+.rightBlock {
+    min-width: 730px;
+}
