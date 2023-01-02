@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {IStateButton} from "../../../types/colorTypes";
 import styles from './button.module.css'
 
 export function Button(props: IStateButton) {
     //Пропсами передаю фон, цвет и текст кнопки
-    const startStyle = {color: props.colorText, backgroundColor: props.colorBack,  outline: props.border }
+    const startStyle = {color: props.colorText, backgroundColor: props.colorBack, outline: props.border}
     // const [style, setStyle] = useState<object>(startStyle)
     // useEffect(()=>{
     //     if(props.hover) {
@@ -15,7 +15,7 @@ export function Button(props: IStateButton) {
     //     console.log('hover',style)
     // },[props.hover])
     return (
-        <button className={styles.btn}  style={startStyle}>
+        <button onClick={props.onClick} className={styles.btn} style={startStyle}>
             {props.text}
         </button>
     );

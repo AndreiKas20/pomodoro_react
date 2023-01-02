@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './input.module.css'
 
-export function Input() {
+interface IInput {
+   value?: string
+   changeValue?: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function Input(props: IInput) {
     return (
-        <input placeholder={'Название задачи'} className={styles.input}></input>
+        <input  onChange={props.changeValue} value={props.value} placeholder={'Название задачи'} className={styles.input}></input>
     );
 }
