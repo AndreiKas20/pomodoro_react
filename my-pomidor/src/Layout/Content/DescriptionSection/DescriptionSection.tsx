@@ -1,39 +1,25 @@
-import React, {ChangeEvent, FormEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import {TitleDescription} from "./TitleDescription";
 import {ListDescription} from "./ListDescription";
 import {Input} from "../../../UI/Input";
 import styles from './descriptionsection.module.css'
 import {Button} from "../../../UI/Button";
 import {ListTask} from "./ListTask";
-import {makeAutoObservable} from "mobx";
 import {observer} from "mobx-react-lite";
-class Task {
-    value = 'MobX is work'
+import taskStore from "../../../store/taskStore";
+import arrTaskStore from "../../../store/arrTaskStore";
+import {generateRandomString} from "../../../utils/getRandomString";
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+export const DescriptionSection = observer(() => {
 
-    updateValue(newValue: string) {
-        this.value = newValue
-    }
-}
-const myTask = new Task()
-
-export const DescriptionSection = observer(()=>{
-
-
-
-    console.log('render Description')
     function changeValue(event: ChangeEvent<HTMLInputElement>) {
-        myTask.updateValue(event.target.value)
-        console.log('change', myTask.value)
+        taskStore.updateValue(event.target.value)
     }
-    function handleSubmit(event: FormEvent) {
-        event.preventDefault();
-        console.log(myTask.value)
-        alert(myTask.value)
+
+    function handleSubmit() {
+        arrTaskStore.addTask({countPomodoro: 1, textTask: taskStore.value, id: generateRandomString()})
     }
+
     return (
         <div>
             <div className={styles.title}>
@@ -43,10 +29,11 @@ export const DescriptionSection = observer(()=>{
                 <ListDescription/>
             </div>
             <div className={styles.input}>
-                <Input changeValue={changeValue} value={myTask.value}/>
+                <Input changeValue={changeValue} value={taskStore.value}/>
             </div>
             <div className={styles.btn}>
-                <Button onClick={handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'} colorBack={'var(--green4F)'}/>
+                <Button onClick={handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'}
+                        colorBack={'var(--green4F)'}/>
             </div>
             <div>
                 <ListTask/>

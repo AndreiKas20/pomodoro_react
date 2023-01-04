@@ -2,11 +2,21 @@ import React from 'react';
 import styles from './dropdownmenu.module.css';
 import {Icon} from "../Icon";
 
-export function DropdownMenu() {
+interface IDropChange {
+    clickPlus: any
+    clickMinus: any
+    deleteTask: any
+    noActive: boolean
+    clickEdit: () => void
+}
+
+export function DropdownMenu({clickPlus, clickMinus, deleteTask, noActive, clickEdit}: IDropChange) {
     return (
         <ul className={styles.list}>
             <li className={styles.item}>
-                <button className={styles.btn}>
+                <button onClick={
+                     clickPlus
+                } className={styles.btn}>
                     <div className={styles.icon}>
                         <Icon nameIcon={'IconPlus'}/>
                     </div>
@@ -14,15 +24,15 @@ export function DropdownMenu() {
                 </button>
             </li>
             <li className={styles.item}>
-                <button className={styles.btn}>
+                <button disabled={noActive} onClick={clickMinus} className={styles.btn} style={noActive ? {cursor: 'default', transform: 'none'}: {}}>
                     <div className={styles.icon}>
-                        <Icon nameIcon={'IconMinus'}/>
+                        <Icon noActive={noActive} nameIcon={'IconMinus'}/>
                     </div>
                     <p className={styles.text}>Уменьшить</p>
                 </button>
             </li>
             <li className={styles.item}>
-                <button className={styles.btn}>
+                <button onClick={clickEdit} className={styles.btn}>
                     <div className={styles.icon}>
                         <Icon nameIcon={'IconRedactor'}/>
                     </div>
@@ -30,7 +40,7 @@ export function DropdownMenu() {
                 </button>
             </li>
             <li className={styles.item}>
-                <button className={styles.btn}>
+                <button onClick={deleteTask} className={styles.btn}>
                     <div className={styles.icon}>
                         <Icon nameIcon={'IconDelete'}/>
                     </div>

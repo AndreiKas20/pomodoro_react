@@ -43,3 +43,9 @@
 .leftSide {
     margin-right: auto;
 }
+
+.editInput {
+    position: absolute;
+    left: 27px;
+    top: 0;
+}

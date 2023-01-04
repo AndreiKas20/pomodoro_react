@@ -12,40 +12,41 @@ interface IIcon {
     nameIcon: nameIcon
     width?: string
     height?: string
+    noActive?: boolean
 }
 
-export function Icon({nameIcon, height, width}: IIcon) {
+export function Icon({nameIcon, height, width, noActive}: IIcon) {
     if (nameIcon === 'IconMinus') {
         return (
-            <IconMinus width={width} hidth={height}/>
+            <IconMinus width={width} hidth={height} noActive={noActive}/>
         )
     }
     if (nameIcon === 'IconDelete') {
         return (
-            <IconDelete width={width} hidth={height}/>
+            <IconDelete width={width} hidth={height} noActive={noActive}/>
         )
     }
     if (nameIcon === 'IconPlus') {
         return (
-            <IconPlus width={width} hidth={height}/>
+            <IconPlus width={width} hidth={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconPomidor') {
         return (
-            <IconPomidor width={width} hidth={height}/>
+            <IconPomidor width={width} hidth={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconRedactor') {
         return (
-            <IconRedactor width={width} hidth={height}/>
+            <IconRedactor width={width} hidth={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconStatistic') {
         return (
-            <IconStatistic width={width} hidth={height}/>
+            <IconStatistic width={width} hidth={height} />
         )
     }
     return (

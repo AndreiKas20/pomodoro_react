@@ -1,14 +1,14 @@
 import React from 'react';
 import {ItemTask} from "./ItemTask";
-import {generateRandomString} from "../../../../utils/getRandomString";
+import {observer} from "mobx-react-lite";
+import arrTaskStore from "../../../../store/arrTaskStore";
 
-export function ListTask() {
-    const arrItem: Array<string> = ['Купить пса', 'Продать пса', 'Купить кота']
+export const ListTask = observer(() => {
     return (
         <ul>
             {
-                arrItem.map(value => <ItemTask key={generateRandomString()} textItem={value}/>)
+                arrTaskStore.arrTask.map(value => <ItemTask key={value.id} taskItem={value}/>)
             }
         </ul>
     );
-}
+})

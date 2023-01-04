@@ -1,9 +1,15 @@
 import React from 'react';
 import {Icon} from "../../UI/Icon";
 import styles from './header.module.css'
+import {observer} from "mobx-react-lite";
 
-export function Header() {
+export const Header = observer(() => {
+
     console.log('render Header')
+
+    function click() {
+    }
+
     return (
         <div className={styles.block}>
             <div className={styles.iconBlock}>
@@ -12,7 +18,7 @@ export function Header() {
                 </div>
                 <h1 className={styles.title}>pomodoro_box</h1>
             </div>
-            <button className={styles.linkBlock}>
+            <button onClick={click} className={styles.linkBlock}>
                 <div className={styles.iconStatistic}>
                     <Icon nameIcon={'IconStatistic'}></Icon>
                 </div>
@@ -23,4 +29,4 @@ export function Header() {
             </button>
         </div>
     );
-}
+})

@@ -3,6 +3,7 @@ import React from 'react';
 interface IIcon {
     width?: string
     hidth?: string
+    noActive?: boolean
 }
 
 export function IconPomidor(props: IIcon) {
