@@ -11,11 +11,12 @@ interface IDropChange {
 }
 
 export function DropdownMenu({clickPlus, clickMinus, deleteTask, noActive, clickEdit}: IDropChange) {
+
     return (
         <ul className={styles.list}>
             <li className={styles.item}>
                 <button onClick={
-                     clickPlus
+                    clickPlus
                 } className={styles.btn}>
                     <div className={styles.icon}>
                         <Icon nameIcon={'IconPlus'}/>
@@ -24,7 +25,8 @@ export function DropdownMenu({clickPlus, clickMinus, deleteTask, noActive, click
                 </button>
             </li>
             <li className={styles.item}>
-                <button disabled={noActive} onClick={clickMinus} className={styles.btn} style={noActive ? {cursor: 'default', transform: 'none'}: {}}>
+                <button disabled={noActive} onClick={clickMinus} className={styles.btn}
+                        style={noActive ? {cursor: 'default', transform: 'none'} : {}}>
                     <div className={styles.icon}>
                         <Icon noActive={noActive} nameIcon={'IconMinus'}/>
                     </div>

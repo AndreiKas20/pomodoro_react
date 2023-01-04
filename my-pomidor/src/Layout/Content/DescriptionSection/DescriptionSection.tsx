@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, FormEvent} from 'react';
 import {TitleDescription} from "./TitleDescription";
 import {ListDescription} from "./ListDescription";
 import {Input} from "../../../UI/Input";
@@ -16,8 +16,10 @@ export const DescriptionSection = observer(() => {
         taskStore.updateValue(event.target.value)
     }
 
-    function handleSubmit() {
+    function handleSubmit(event: FormEvent) {
+        event.preventDefault()
         arrTaskStore.addTask({countPomodoro: 1, textTask: taskStore.value, id: generateRandomString()})
+        taskStore.updateValue('')
     }
 
     return (
@@ -28,13 +30,16 @@ export const DescriptionSection = observer(() => {
             <div className={styles.list}>
                 <ListDescription/>
             </div>
-            <div className={styles.input}>
-                <Input changeValue={changeValue} value={taskStore.value}/>
-            </div>
-            <div className={styles.btn}>
-                <Button onClick={handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'}
-                        colorBack={'var(--green4F)'}/>
-            </div>
+            <form onSubmit={handleSubmit}>
+                <div className={styles.input}>
+                    <Input changeValue={changeValue} value={taskStore.value}/>
+                </div>
+                <div className={styles.btn}>
+                    <Button onClick={handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'}
+                            colorBack={'var(--green4F)'}/>
+                </div>
+            </form>
+
             <div>
                 <ListTask/>
             </div>

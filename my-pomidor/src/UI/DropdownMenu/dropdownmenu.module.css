@@ -1,8 +1,8 @@
 .list {
-    position: absolute;
+    position: relative;
     padding: 17px 23px;
-    top: 40px;
-    right: -64px;
+    /*top: 40px;*/
+    /*right: -64px;*/
     min-width: 165px;
     min-height: 153px;
     border: 1px solid var(--greyC4);

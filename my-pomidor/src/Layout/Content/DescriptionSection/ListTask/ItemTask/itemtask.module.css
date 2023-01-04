@@ -49,3 +49,9 @@
     left: 27px;
     top: 0;
 }
+
+.dropPosition {
+    position: absolute;
+    top: 40px;
+    right: -63px;
+}
