@@ -2,11 +2,15 @@ import React from 'react';
 import {TaskName} from "./TaskName";
 import {TaskCount} from "./TaskCount";
 import styles from './headertimerblock.module.css'
-export function HeaderTimerBlock() {
+import {observer} from "mobx-react-lite";
+import arrTaskStore from "../../../../store/arrTaskStore";
+
+export const HeaderTimerBlock = observer (() => {
+    const task = arrTaskStore.arrTask[0]
     return (
         <header className={styles.header}>
-            <TaskName taskName={'1'}></TaskName>
-            <TaskCount count={'2'}></TaskCount>
+            <TaskName taskName={task.textTask}></TaskName>
+            <TaskCount count={task.countPomodoro}></TaskCount>
         </header>
     );
-}
+})

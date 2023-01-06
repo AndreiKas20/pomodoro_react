@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './taskcount.module.css';
 interface ITask {
-  count: string
+  count: number
 }
 
 export function TaskCount(props: ITask) {
   //Пропсами передаю количество помидоров
   return (
-    <span className={styles.count}>{props.count}Заглушка</span>
+    <span className={styles.count}>Помидор {props.count}</span>
   );
 }

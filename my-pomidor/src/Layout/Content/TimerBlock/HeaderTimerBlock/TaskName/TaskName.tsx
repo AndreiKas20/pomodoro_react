@@ -6,6 +6,6 @@ interface ITask {
 export function TaskName(props: ITask) {
     //Пропсами передаю название таски
     return (
-        <span className={styles.task}>{props.taskName}Заглушка</span>
+        <span className={styles.task}>{props.taskName}</span>
     );
 }

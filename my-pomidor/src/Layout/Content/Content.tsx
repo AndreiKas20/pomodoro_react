@@ -8,10 +8,10 @@ export function Content() {
     return (
         <div className={styles.content}>
             <div className={styles.leftBlock}>
-                <DescriptionSection></DescriptionSection>
+                <DescriptionSection/>
             </div>
             <div className={styles.rightBlock}>
-                <TimerBlock></TimerBlock>
+                <TimerBlock/>
             </div>
         </div>
     );

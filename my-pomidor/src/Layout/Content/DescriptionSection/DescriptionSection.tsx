@@ -39,7 +39,6 @@ export const DescriptionSection = observer(() => {
                             colorBack={'var(--green4F)'}/>
                 </div>
             </form>
-
             <div>
                 <ListTask/>
             </div>
