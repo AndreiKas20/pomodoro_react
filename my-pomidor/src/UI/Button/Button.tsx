@@ -15,7 +15,7 @@ export function Button(props: IStateButton) {
     //     console.log('hover',style)
     // },[props.hover])
     return (
-        <button onClick={props.onClick} className={styles.btn} style={startStyle}>
+        <button onClick={props.onClick} className={styles.btn} style={props.style}>
             {props.text}
         </button>
     );

@@ -27,11 +27,12 @@ type colorVar =
 type border = '2px solid'
 
 export interface IStateButton {
-    colorText: colorVar;
-    colorBack: colorVar;
+    colorText?: colorVar;
+    colorBack?: colorVar;
     border?: border ;
     text: string;
     onClick?: (event: FormEvent)=> void
+    style?: {}
     // styleHover: {
     //     color?: colorVar,
     //     backgroundColor?: colorVar

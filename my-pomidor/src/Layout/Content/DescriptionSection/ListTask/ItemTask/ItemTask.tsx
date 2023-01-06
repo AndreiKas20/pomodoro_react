@@ -14,12 +14,12 @@ export function ItemTask({taskItem}: IItemTask) {
     const [dropdown, setDropdown] = useState(false)
     const [disabledMin, setDisabledMin] = useState(false)
     const [editInput, setEditInput] = useState(false)
-    const onClick = () => {
-        setDropdown(!dropdown)
-    }
     const listRef = useRef<HTMLLIElement>(null)
     const inputEditRef = useRef<HTMLDivElement>(null)
     const listDropRef = useRef<HTMLDivElement>(null)
+    const onClick = () => {
+        setDropdown(!dropdown)
+    }
     const handleClick = (event: MouseEvent) => {
         if (event.target instanceof Node && !listRef.current?.contains(event.target)) {
             closeDrop()
@@ -28,7 +28,6 @@ export function ItemTask({taskItem}: IItemTask) {
             setEditInput(false)
         }
     }
-
     useEffect(() => {
         if (taskItem.countPomodoro === 1) {
             setDisabledMin(true)
@@ -36,27 +35,21 @@ export function ItemTask({taskItem}: IItemTask) {
             setDisabledMin(false)
         }
     }, [taskItem.countPomodoro])
-
-
     const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
         arrTaskStore.editTask(taskItem.id, event.target.value)
     }
-
     const clickEdit = () => {
         setEditInput(!editInput)
         // setDropdown(false)
     }
-
     const keyPressEnter = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
             setEditInput(false)
         }
     }
-
     const closeDrop = () => {
         setDropdown(false)
     }
-
     useEffect(() => {
         if (editInput) {
             document.addEventListener('keypress', keyPressEnter)
@@ -65,19 +58,15 @@ export function ItemTask({taskItem}: IItemTask) {
             }
         }
     }, [editInput])
-
     const clickPlus = () => {
         arrTaskStore.countEditPlus(taskItem.id, taskItem.countPomodoro)
     }
-
     const clickMinus = () => {
         arrTaskStore.countEditMinus(taskItem.id, taskItem.countPomodoro)
     }
-
     const deleteTask = () => {
         arrTaskStore.deleteTask(taskItem.id)
     }
-
     useEffect(() => {
         document.addEventListener('click', handleClick)
         return () => {
@@ -97,10 +86,7 @@ export function ItemTask({taskItem}: IItemTask) {
                     </div>
                 }
             </div>
-
             <ButtonDropdown onClick={onClick}/>
-
-
             {
                 dropdown &&
                 <div className={styles.dropPosition} ref={listDropRef}>

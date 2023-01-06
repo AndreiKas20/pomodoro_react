@@ -1,4 +1,7 @@
 .span {
+    min-width: 422px;
+    position: relative;
+    display: flex;
     font-weight: 200;
     font-size: 150px;
     line-height: 179px;

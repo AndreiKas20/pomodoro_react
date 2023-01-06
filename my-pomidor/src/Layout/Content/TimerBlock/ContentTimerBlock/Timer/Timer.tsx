@@ -11,14 +11,17 @@ export function Timer({second, minute}: ITimer) {
     const [zeroMin, setZeroMin] = useState('')
     useEffect(() => {
         if (second < 10) {
-            console.log(second, 'second')
             setZeroSec('0')
+        } else {
+            setZeroSec('')
         }
         if (minute < 10) {
             setZeroMin('0')
+        } else {
+            setZeroMin('')
         }
     }, [second, minute])
     return (
-        <span className={styles.span}>{zeroMin}{minute} : {zeroSec}{second}</span>
+        <span className={styles.span}>{zeroMin}{minute}:{zeroSec}{second}</span>
     );
 }

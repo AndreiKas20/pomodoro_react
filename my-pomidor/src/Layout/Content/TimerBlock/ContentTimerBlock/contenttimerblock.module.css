@@ -10,6 +10,7 @@
 
 .blockBtn {
     display: flex;
+    justify-content: center;
 }
 
 .btnLeft{
@@ -20,4 +21,10 @@
     position: absolute;
     right: -100px;
     top: 70px;
+}
+
+.timerBlock {
+    position:relative;
+    top: 0;
+    left: 0;
 }
