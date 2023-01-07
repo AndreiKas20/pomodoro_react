@@ -1,21 +1,24 @@
-import React from 'react';
-import {IStateButton} from "../../../types/colorTypes";
+import React, {useEffect, useState} from 'react';
+import {IStateButton, styleBtn} from "../../../types/colorTypes";
 import styles from './button.module.css'
 
 export function Button(props: IStateButton) {
     //Пропсами передаю фон, цвет и текст кнопки
-    const startStyle = {color: props.colorText, backgroundColor: props.colorBack, outline: props.border}
-    // const [style, setStyle] = useState<object>(startStyle)
-    // useEffect(()=>{
-    //     if(props.hover) {
-    //         setStyle(props.styleHover)
-    //     } else {
-    //         setStyle(startStyle)
-    //     }
-    //     console.log('hover',style)
-    // },[props.hover])
+    const [style, setStyle] = useState<styleBtn>(props.style)
+    const [hover, setHover] = useState<boolean>(false)
+    useEffect(() => {
+        if (hover) {
+            setStyle(props.hoverIn)
+        } else {
+            setStyle(props.style)
+        }
+    }, [hover, props.style, props.hoverIn])
     return (
-        <button onClick={props.onClick} className={styles.btn} style={props.style}>
+        <button onMouseEnter={() => {
+            setHover(true)
+        }} onMouseOut={() => {
+            setHover(false)
+        }} onClick={props.onClick} className={styles.btn} style={style}>
             {props.text}
         </button>
     );

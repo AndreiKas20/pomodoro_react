@@ -16,8 +16,7 @@ export function AddTaskForm(props: ITaskForm) {
                        className={styles.input}></input>
             </div>
             <div className={styles.btn}>
-                <Button onClick={props.handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'}
-                        colorBack={'var(--green4F)'}/>
+                {/*<Button hoverIn={} onClick={props.handleSubmit} text={'Добавить'}/>*/}
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import {FormEvent} from "react";
 
 
-type colorVar =
+export type colorVar =
     'var(--black)'
     | 'var(--red22)'
     | 'var(--green4F)'
@@ -26,16 +26,13 @@ type colorVar =
 
 type border = '2px solid'
 
+export type styleBtn = {color?: colorVar, backgroundColor?: colorVar, border?: border}
+
 export interface IStateButton {
-    colorText?: colorVar;
-    colorBack?: colorVar;
-    border?: border ;
     text: string;
-    onClick?: (event: FormEvent)=> void
-    style?: {}
-    // styleHover: {
-    //     color?: colorVar,
-    //     backgroundColor?: colorVar
-    // };
+    onClick?: (event: FormEvent)=> void;
+    style: styleBtn;
+    hoverIn: styleBtn;
+    hoverOut?: styleBtn;
 }
 

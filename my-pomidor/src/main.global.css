@@ -310,7 +310,7 @@ input {
 }
 
 button{
-  transition: transform .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 button:hover{
   transform: scale(1.065);

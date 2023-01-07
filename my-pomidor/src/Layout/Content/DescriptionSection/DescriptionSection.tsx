@@ -9,6 +9,7 @@ import {observer} from "mobx-react-lite";
 import taskStore from "../../../store/taskStore";
 import arrTaskStore from "../../../store/arrTaskStore";
 import {generateRandomString} from "../../../utils/getRandomString";
+import {styleBtn} from "../../../../types/colorTypes";
 
 export const DescriptionSection = observer(() => {
 
@@ -21,6 +22,9 @@ export const DescriptionSection = observer(() => {
         arrTaskStore.addTask({countPomodoro: 1, textTask: taskStore.value, id: generateRandomString()})
         taskStore.updateValue('')
     }
+
+    const btnDefaultStyle: styleBtn = {color: "var(--fullWhite)", backgroundColor: "var(--green4F)"}
+    const hoverIn: styleBtn = {color: "var(--fullWhite)", backgroundColor: "var(--green41)"}
 
     return (
         <div>
@@ -35,8 +39,8 @@ export const DescriptionSection = observer(() => {
                     <Input changeValue={changeValue} value={taskStore.value}/>
                 </div>
                 <div className={styles.btn}>
-                    <Button onClick={handleSubmit} text={'Добавить'} colorText={'var(--fullWhite)'}
-                            colorBack={'var(--green4F)'}/>
+                    <Button hoverIn={hoverIn} hoverOut={btnDefaultStyle} onClick={handleSubmit} text={'Добавить'}
+                            style={btnDefaultStyle}/>
                 </div>
             </form>
             <div>
