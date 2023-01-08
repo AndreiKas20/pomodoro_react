@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styles from './timer.module.css';
+import {styleBtn} from "../../../../../../types/colorTypes";
 
 interface ITimer {
     second: number;
     minute: number;
+    style: styleBtn
 }
 
-export function Timer({second, minute}: ITimer) {
+export function Timer({second, minute, style}: ITimer) {
     const [zeroSec, setZeroSec] = useState('')
     const [zeroMin, setZeroMin] = useState('')
     useEffect(() => {
@@ -22,6 +24,6 @@ export function Timer({second, minute}: ITimer) {
         }
     }, [second, minute])
     return (
-        <span className={styles.span}>{zeroMin}{minute}:{zeroSec}{second}</span>
+        <span style={style} className={styles.span}>{zeroMin}{minute}:{zeroSec}{second}</span>
     );
 }

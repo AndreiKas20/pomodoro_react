@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from './buttonellipse.module.css'
 
-export function ButtonEllipse() {
+interface IBtn {
+    onClick: () => void
+}
+
+export function ButtonEllipse(props : IBtn) {
     return (
-        <button>
+        <button onClick={props.onClick}>
             <svg className={styles.btn} width="50" height="50" viewBox="0 0 50 50" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <circle cx="25" cy="25" r="25" fill="#C4C4C4"/>

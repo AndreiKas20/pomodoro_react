@@ -13,6 +13,8 @@ export const ContentTimerBlock = observer(() => {
     const [second, setSecond] = useState(5)
     const [minute, setMinute] = useState(0)
     const [target, setTarget] = useState(true)
+    const [countBreak, setCountBreak] = useState(1)
+    const [colorTimer, setColorTimer] = useState<styleBtn>({color: "var(--black)"})
     const [targetBreak, setTargetBreak] = useState(false)
     const [breakTime, setBreakTime] = useState(false)
     const [stateTimer, setStateTimer] = useState<typeStateTimer>('stop')
@@ -31,18 +33,21 @@ export const ContentTimerBlock = observer(() => {
         if (stateTimer === "pauseInBreak") setStateTimer("break")
         setClickLeftBtn(!clickLeftBtn)
     }
+    const clickBtnAdd = () => {
+            setMinute(minute + 1)
+    }
     const clickRight = () => {
         if (stateTimer === 'start') {
             setClickLeftBtn(false)
             setStateTimer('stop')
         }
-        if (stateTimer === 'pauseInBreak'|| stateTimer==='break') {
+        if (stateTimer === 'pauseInBreak' || stateTimer === 'break') {
             setStateTimer("start")
             setClickLeftBtn(true)
-            setSecond(0)
-            setMinute(25)
+            setSecond(6)
+            setMinute(0)
         }
-        if (stateTimer==="pause") {
+        if (stateTimer === "pause") {
             setStateTimer("stop")
             setClickLeftBtn(false)
         }
@@ -67,17 +72,21 @@ export const ContentTimerBlock = observer(() => {
     }, [clickLeftBtn, second, minute, breakTime])
 
     useEffect(() => {
+        console.log('state count break', countBreak)
+    }, [countBreak])
+    useEffect(() => {
         if (targetBreak && breakTime) {
             setStateTimer('break')
             setTargetBreak(false)
         }
         if (!breakTime && targetBreak) {
             setStateTimer("start")
-            setMinute(25)
-            setSecond(0)
+            setMinute(0)
+            setSecond(6)
             setTargetBreak(false)
         }
         if (stateTimer === 'pause') {
+            setColorTimer({color: "var(--black)"})
             setBtnLeftName('Продолжить')
             setBtnRightName('Сделано')
         }
@@ -85,16 +94,25 @@ export const ContentTimerBlock = observer(() => {
             setBreakTime(true)
             setBtnLeftName('Пауза')
             setBtnRightName('Стоп')
+            setColorTimer({color: "var(--red22)"})
             setBtnRightHover({color: "var(--fullWhite)", backgroundColor: "var(--red22)", border: '2px solid'})
             setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
         }
         if (stateTimer === 'break') {
             if (target) {
-                setMinute(0)
-                setSecond(5)
+                if (countBreak === 4) {
+                    setMinute(0)
+                    setSecond(30)
+                    setCountBreak(1)
+                } else {
+                    setCountBreak(countBreak + 1)
+                    setMinute(0)
+                    setSecond(5)
+                }
                 setTarget(false)
             }
             setBreakTime(false)
+            setColorTimer({color: "var(--green4F)"})
             setBtnLeftName('Пауза')
             setBtnRightName('Пропустить')
             setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
@@ -104,19 +122,21 @@ export const ContentTimerBlock = observer(() => {
             setMinute(0)
             setBtnLeftName('Старт')
             setBtnRightName('Стоп')
+            setColorTimer({color: 'var(--black)'})
             setBtnRightHover({color: 'var(--greyC4)', border: '2px solid'})
             setBtnRightStyle({color: 'var(--greyC4)', border: '2px solid'})
         }
         if (stateTimer === 'pauseInBreak') {
+            setColorTimer({color: 'var(--black)'})
             setBtnLeftName('Продолжить')
             setBtnRightName('Пропустить')
         }
         stateTimerStore.changeSate(stateTimer)
-    }, [stateTimer, targetBreak, breakTime, target])
+    }, [stateTimer, targetBreak, breakTime, target, countBreak])
 
     return (
         <div className={styles.block}>
-            <Timer second={second} minute={minute}/>
+            <Timer style={colorTimer} second={second} minute={minute}/>
             <div className={styles.blockTask}>
                 <TaskName taskName={''}/>
             </div>
@@ -129,7 +149,7 @@ export const ContentTimerBlock = observer(() => {
                 </div>
             </div>
             <div className={styles.btnPlus}>
-                <ButtonEllipse/>
+                <ButtonEllipse onClick={clickBtnAdd}/>
             </div>
         </div>
     );
