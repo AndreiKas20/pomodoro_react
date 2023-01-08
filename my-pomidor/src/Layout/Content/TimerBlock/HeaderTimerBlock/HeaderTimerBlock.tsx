@@ -18,6 +18,9 @@ export const HeaderTimerBlock = observer(() => {
         if (stateTimer === 'stop') {
             setStyleHeader({backgroundColor: 'var(--greyC4)'})
         }
+        if (stateTimer === 'break') {
+            setStyleHeader({backgroundColor: "var(--green4F)"})
+        }
     }, [stateTimer])
     return (
         <header style={styleHeader} className={styles.header}>

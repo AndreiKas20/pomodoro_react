@@ -9,14 +9,13 @@ import stateTimerStore from "../../../../store/stateTimerStore";
 import {styleBtn} from "../../../../../types/colorTypes";
 import {typeStateTimer} from "../../../../../types/typeStateTimer";
 
-export const ContentTimerBlock = observer (() => {
+export const ContentTimerBlock = observer(() => {
     const [second, setSecond] = useState(5)
     const [minute, setMinute] = useState(0)
     const [target, setTarget] = useState(true)
-    const [timeOut, setTimeOut] = useState(false)
-    const [breakTime, setBreakTime] =useState(false)
-    const [stateTimer, setStateTimer] = useState<typeStateTimer>('')
-    const [firstStart, setFirstStart] = useState(false)
+    const [targetBreak, setTargetBreak] = useState(false)
+    const [breakTime, setBreakTime] = useState(false)
+    const [stateTimer, setStateTimer] = useState<typeStateTimer>('stop')
     const [clickLeftBtn, setClickLeftBtn] = useState(false)
     const [btnLeftName, setBtnLeftName] = useState('Старт')
     const [btnRightName, setBtnRightName] = useState('Стоп')
@@ -25,26 +24,33 @@ export const ContentTimerBlock = observer (() => {
     const btnLeftHover: styleBtn = {backgroundColor: "var(--green41)", color: "var(--fullWhite)"}
     const [btnRightHover, setBtnRightHover] = useState<styleBtn>(btnRightStyle)
     const clickStart = () => {
-        setStateTimer('start')
-        if (stateTimer === "start") {
-            setStateTimer('pause')
-        }
+        if (stateTimer === 'stop') setStateTimer("start")
+        if (stateTimer === "start") setStateTimer("pause")
+        if (stateTimer === "pause") setStateTimer("start")
+        if (stateTimer === "break") setStateTimer("pauseInBreak")
+        if (stateTimer === "pauseInBreak") setStateTimer("break")
         setClickLeftBtn(!clickLeftBtn)
-        setFirstStart(true)
     }
-
     const clickRight = () => {
         if (stateTimer === 'start') {
             setClickLeftBtn(false)
             setStateTimer('stop')
         }
+        if (stateTimer === 'pauseInBreak'|| stateTimer==='break') {
+            setStateTimer("start")
+            setClickLeftBtn(true)
+            setSecond(0)
+            setMinute(25)
+        }
+        if (stateTimer==="pause") {
+            setStateTimer("stop")
+            setClickLeftBtn(false)
+        }
     }
-
     useEffect(() => {
         if (second === 0 && minute === 0) {
-            setBreakTime(!breakTime)
-            setTimeOut(true)
-            setClickLeftBtn(false)
+            setTargetBreak(true)
+            if (breakTime) setTarget(true)
         }
         if (clickLeftBtn) {
             const timer = setInterval(() => {
@@ -55,44 +61,58 @@ export const ContentTimerBlock = observer (() => {
                     setSecond(59)
                     setMinute(minute - 1)
                 }
-            }, 1000);
+            }, 900);
             return () => clearInterval(timer);
         }
-    }, [clickLeftBtn, second, minute, firstStart, stateTimer, breakTime])
-    useEffect(()=>{
-        if (timeOut) {
+    }, [clickLeftBtn, second, minute, breakTime])
+
+    useEffect(() => {
+        if (targetBreak && breakTime) {
             setStateTimer('break')
+            setTargetBreak(false)
         }
-        if(stateTimer === 'pause') {
+        if (!breakTime && targetBreak) {
+            setStateTimer("start")
+            setMinute(25)
+            setSecond(0)
+            setTargetBreak(false)
+        }
+        if (stateTimer === 'pause') {
             setBtnLeftName('Продолжить')
             setBtnRightName('Сделано')
         }
-        if(stateTimer === 'start') {
+        if (stateTimer === 'start') {
+            setBreakTime(true)
             setBtnLeftName('Пауза')
             setBtnRightName('Стоп')
             setBtnRightHover({color: "var(--fullWhite)", backgroundColor: "var(--red22)", border: '2px solid'})
             setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
         }
-        if(stateTimer === 'break'&& breakTime) {
+        if (stateTimer === 'break') {
             if (target) {
-                setMinute(5)
+                setMinute(0)
+                setSecond(5)
                 setTarget(false)
             }
-            setClickLeftBtn(true)
+            setBreakTime(false)
             setBtnLeftName('Пауза')
             setBtnRightName('Пропустить')
             setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
         }
-
         if (stateTimer === "stop") {
-            setSecond(0)
-            setMinute(25)
+            setSecond(6)
+            setMinute(0)
             setBtnLeftName('Старт')
             setBtnRightName('Стоп')
+            setBtnRightHover({color: 'var(--greyC4)', border: '2px solid'})
             setBtnRightStyle({color: 'var(--greyC4)', border: '2px solid'})
         }
+        if (stateTimer === 'pauseInBreak') {
+            setBtnLeftName('Продолжить')
+            setBtnRightName('Пропустить')
+        }
         stateTimerStore.changeSate(stateTimer)
-    }, [stateTimer,timeOut, minute, breakTime, target])
+    }, [stateTimer, targetBreak, breakTime, target])
 
     return (
         <div className={styles.block}>
@@ -105,7 +125,7 @@ export const ContentTimerBlock = observer (() => {
                     <Button hoverIn={btnLeftHover} onClick={clickStart} text={btnLeftName} style={btnLeftStyle}/>
                 </div>
                 <div className={styles.btnRight}>
-                    <Button onClick={clickRight} hoverIn={btnRightHover} text={btnRightName} style={btnRightStyle} />
+                    <Button onClick={clickRight} hoverIn={btnRightHover} text={btnRightName} style={btnRightStyle}/>
                 </div>
             </div>
             <div className={styles.btnPlus}>

@@ -3,7 +3,7 @@ import {typeStateTimer} from "../../types/typeStateTimer";
 
 
 class StateTimer {
-    stateTimer = '';
+    stateTimer: typeStateTimer = 'stop';
     constructor() {
         makeAutoObservable(this)
     }
