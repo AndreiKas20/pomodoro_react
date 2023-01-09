@@ -40,7 +40,6 @@ export function ItemTask({taskItem}: IItemTask) {
     }
     const clickEdit = () => {
         setEditInput(!editInput)
-        // setDropdown(false)
     }
     const keyPressEnter = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {

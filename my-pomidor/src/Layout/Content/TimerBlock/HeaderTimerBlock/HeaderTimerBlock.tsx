@@ -9,7 +9,17 @@ import {styleBtn} from "../../../../../types/colorTypes";
 
 export const HeaderTimerBlock = observer(() => {
     const [styleHeader, setStyleHeader] = useState<styleBtn>({})
-    const task = arrTaskStore.arrTask[0]
+    const [task, setTask] = useState('')
+    const [count, setCount] = useState(0)
+    const arrStore = arrTaskStore.arrTask[0]
+    useEffect(() => {
+        if (arrTaskStore.arrTask[0]) {
+            setTask(arrTaskStore.arrTask[0].textTask)
+            setCount(arrTaskStore.arrTask[0].countPomodoro)
+        } else {
+            setTask('Нет задачи')
+        }
+    }, [arrStore])
     const stateTimer = stateTimerStore.stateTimer
     useEffect(() => {
         if (stateTimer === 'start') {
@@ -24,8 +34,8 @@ export const HeaderTimerBlock = observer(() => {
     }, [stateTimer])
     return (
         <header style={styleHeader} className={styles.header}>
-            <TaskName taskName={task.textTask}></TaskName>
-            <TaskCount count={task.countPomodoro}></TaskCount>
+            <TaskName taskName={task}/>
+            <TaskCount count={count}/>
         </header>
     );
 })

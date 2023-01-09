@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import stateTimerStore from "../../../../store/stateTimerStore";
 import {styleBtn} from "../../../../../types/colorTypes";
 import {typeStateTimer} from "../../../../../types/typeStateTimer";
+import arrTaskStore from "../../../../store/arrTaskStore";
 
 export const ContentTimerBlock = observer(() => {
     const [second, setSecond] = useState(5)
@@ -25,13 +26,19 @@ export const ContentTimerBlock = observer(() => {
     const [btnRightStyle, setBtnRightStyle] = useState<styleBtn>({color: 'var(--greyC4)', border: '2px solid'})
     const btnLeftHover: styleBtn = {backgroundColor: "var(--green41)", color: "var(--fullWhite)"}
     const [btnRightHover, setBtnRightHover] = useState<styleBtn>(btnRightStyle)
+    const [idTask, setIdTask] = useState<string>('')
+    const arrStore = arrTaskStore.arrTask[0]
     const clickStart = () => {
-        if (stateTimer === 'stop') setStateTimer("start")
-        if (stateTimer === "start") setStateTimer("pause")
-        if (stateTimer === "pause") setStateTimer("start")
-        if (stateTimer === "break") setStateTimer("pauseInBreak")
-        if (stateTimer === "pauseInBreak") setStateTimer("break")
-        setClickLeftBtn(!clickLeftBtn)
+        if (!arrStore) {
+            alert('Добавьте задачу')
+        } else {
+            if (stateTimer === 'stop') setStateTimer("start")
+            if (stateTimer === "start") setStateTimer("pause")
+            if (stateTimer === "pause") setStateTimer("start")
+            if (stateTimer === "break") setStateTimer("pauseInBreak")
+            if (stateTimer === "pauseInBreak") setStateTimer("break")
+            setClickLeftBtn(!clickLeftBtn)
+        }
     }
     const clickBtnAdd = () => {
             setMinute(minute + 1)
@@ -72,9 +79,7 @@ export const ContentTimerBlock = observer(() => {
     }, [clickLeftBtn, second, minute, breakTime])
 
     useEffect(() => {
-        console.log('state count break', countBreak)
-    }, [countBreak])
-    useEffect(() => {
+        if(arrStore) setIdTask(arrStore.id)
         if (targetBreak && breakTime) {
             setStateTimer('break')
             setTargetBreak(false)
@@ -91,15 +96,24 @@ export const ContentTimerBlock = observer(() => {
             setBtnRightName('Сделано')
         }
         if (stateTimer === 'start') {
-            setBreakTime(true)
-            setBtnLeftName('Пауза')
-            setBtnRightName('Стоп')
-            setColorTimer({color: "var(--red22)"})
-            setBtnRightHover({color: "var(--fullWhite)", backgroundColor: "var(--red22)", border: '2px solid'})
-            setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
+            if (!arrStore) {
+                setStateTimer('stop')
+                alert('Задачи кончились')
+            } else {
+                setBreakTime(true)
+                setBtnLeftName('Пауза')
+                setBtnRightName('Стоп')
+                setColorTimer({color: "var(--red22)"})
+                setBtnRightHover({color: "var(--fullWhite)", backgroundColor: "var(--red22)", border: '2px solid'})
+                setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
+            }
         }
         if (stateTimer === 'break') {
             if (target) {
+                arrTaskStore.countEditMinus(arrStore.id, arrStore.countPomodoro)
+                if (arrStore.countPomodoro === 1) {
+                    arrTaskStore.deleteTask(idTask)
+                }
                 if (countBreak === 4) {
                     setMinute(0)
                     setSecond(30)
@@ -118,6 +132,7 @@ export const ContentTimerBlock = observer(() => {
             setBtnRightStyle({color: 'var(--red22)', border: '2px solid'})
         }
         if (stateTimer === "stop") {
+            setClickLeftBtn(false)
             setSecond(6)
             setMinute(0)
             setBtnLeftName('Старт')
