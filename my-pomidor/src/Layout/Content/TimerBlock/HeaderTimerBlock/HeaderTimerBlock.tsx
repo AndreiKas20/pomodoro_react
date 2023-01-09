@@ -11,31 +11,32 @@ export const HeaderTimerBlock = observer(() => {
     const [styleHeader, setStyleHeader] = useState<styleBtn>({})
     const [task, setTask] = useState('')
     const [count, setCount] = useState(0)
+    const [textCount, setTextCount] = useState('')
     const arrStore = arrTaskStore.arrTask[0]
     useEffect(() => {
-        if (arrTaskStore.arrTask[0]) {
-            setTask(arrTaskStore.arrTask[0].textTask)
-            setCount(arrTaskStore.arrTask[0].countPomodoro)
-        } else {
-            setTask('Нет задачи')
-        }
+        arrTaskStore.arrTask[0] ? setTask(arrTaskStore.arrTask[0].textTask) : setTask('Нет задачи')
     }, [arrStore])
     const stateTimer = stateTimerStore.stateTimer
     useEffect(() => {
         if (stateTimer === 'start') {
             setStyleHeader({backgroundColor: 'var(--red22)'})
+            setTextCount("Помидор")
+            arrTaskStore.arrTask[0] ? setCount(arrTaskStore.arrTask[0].acceptedPomodoro + 1) : setCount(0)
         }
         if (stateTimer === 'stop') {
+            setTextCount('Помидор')
             setStyleHeader({backgroundColor: 'var(--greyC4)'})
+            arrTaskStore.arrTask[0]? setCount(arrTaskStore.arrTask[0].acceptedPomodoro) : setCount(0)
         }
         if (stateTimer === 'break') {
             setStyleHeader({backgroundColor: "var(--green4F)"})
+            setTextCount('Перерыв')
         }
     }, [stateTimer])
     return (
         <header style={styleHeader} className={styles.header}>
             <TaskName taskName={task}/>
-            <TaskCount count={count}/>
+            <TaskCount text={textCount} count={count}/>
         </header>
     );
 })

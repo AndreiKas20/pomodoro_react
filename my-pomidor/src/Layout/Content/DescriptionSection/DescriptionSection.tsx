@@ -10,6 +10,7 @@ import taskStore from "../../../store/taskStore";
 import arrTaskStore from "../../../store/arrTaskStore";
 import {generateRandomString} from "../../../utils/getRandomString";
 import {styleBtn} from "../../../../types/colorTypes";
+import {ItemTask} from "./ListTask/ItemTask";
 
 export const DescriptionSection = observer(() => {
 
@@ -19,7 +20,7 @@ export const DescriptionSection = observer(() => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
-        arrTaskStore.addTask({countPomodoro: 1, textTask: taskStore.value, id: generateRandomString()})
+        arrTaskStore.addTask({countPomodoro: 1, textTask: taskStore.value, id: generateRandomString(), acceptedPomodoro: 0})
         taskStore.updateValue('')
     }
 
@@ -46,6 +47,10 @@ export const DescriptionSection = observer(() => {
             <div>
                 <ListTask/>
             </div>
+
+            {
+                arrTaskStore.acceptArr.map(value => <ItemTask key={value.id} taskItem={value}/>)
+            }
         </div>
     );
 })

@@ -3,8 +3,10 @@ import {typesArrTask, typesTask} from "../../types/typesArrTask";
 
 
 class ArrayTask {
+    //----Массив для хранения текущих задач
     arrTask: typesArrTask = []
-
+    //----Массив для хранения выполненных задач
+    acceptArr: typesArrTask = []
     constructor() {
         makeAutoObservable(this)
     }
@@ -35,6 +37,15 @@ class ArrayTask {
     //----Меняем значение в поле textTask, первый входной параметр id, второй новый текст
     editTask(id: string, newTextTask: string) {
         this.arrTask = this.arrTask.map(task => task.id === id ? {...task, textTask: newTextTask} : task)
+    }
+
+    //----Увеличиваем значение счетчика ВЫПОЛНЕННЫХ помидоров, первым параметром передаем id, вторым параметром передаем прошлое значение выполненных помидоров
+    editAccept(id: string, count: number) {
+        count++
+        this.arrTask = this.arrTask.map(task => task.id === id ? {...task, acceptedPomodoro: count} : task)
+    }
+    acceptTask(id:string, task: typesTask) {
+        this.acceptArr.push(task)
     }
 }
 

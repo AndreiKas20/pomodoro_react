@@ -84,6 +84,12 @@ export function ItemTask({taskItem}: IItemTask) {
                         <Input value={taskItem.textTask} changeValue={changeValue}/>
                     </div>
                 }
+                {
+                    taskItem.timeBreakTask
+                }
+                {
+                    taskItem.timeWorkTask
+                }
             </div>
             <ButtonDropdown onClick={onClick}/>
             {
