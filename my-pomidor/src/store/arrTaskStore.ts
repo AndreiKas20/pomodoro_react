@@ -1,12 +1,104 @@
 import {makeAutoObservable} from "mobx";
-import {typesArrTask, typesTask} from "../../types/typesArrTask";
+import {dateType, typesArrTask, typesArrTaskComplete, typesTask} from "../../types/typesArrTask";
+import {generateRandomString} from "../utils/getRandomString";
 
 
 class ArrayTask {
     //----Массив для хранения текущих задач
     arrTask: typesArrTask = []
     //----Массив для хранения выполненных задач
-    acceptArr: typesArrTask = []
+    acceptArr: typesArrTaskComplete = [
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2023-01-09',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-09")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-01',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-01")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-02',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-02")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-03',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-03")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-04',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-04")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        }, {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-04',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-04")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-04',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-04")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-07',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-07")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2017-01-08',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-08")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        }
+    ]
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -39,13 +131,20 @@ class ArrayTask {
         this.arrTask = this.arrTask.map(task => task.id === id ? {...task, textTask: newTextTask} : task)
     }
 
-    //----Увеличиваем значение счетчика ВЫПОЛНЕННЫХ помидоров, первым параметром передаем id, вторым параметром передаем прошлое значение выполненных помидоров
+    //----Увеличиваем значение счетчика ВЫПОЛНЕННЫХ помидоров, первым параметром передаем id,
+    //----вторым параметром передаем прошлое значение выполненных помидоров
     editAccept(id: string, count: number) {
         count++
         this.arrTask = this.arrTask.map(task => task.id === id ? {...task, acceptedPomodoro: count} : task)
     }
-    acceptTask(id:string, task: typesTask) {
-        this.acceptArr.push(task)
+
+    //----С каждым переходом в паузу отрабатывает эта функция. Параметрами передаем:
+    // 1- НОВЫЙ ID
+    // 2- Полный объект из старого массива
+    // 3- Объект со свойствами Даты
+    // 4- ID Из задачи из старого массива
+    acceptTask(id: string, task: typesTask, dateCompletion: dateType, idArrTasks: string) {
+        this.acceptArr.push({...task, dateCompletion, idArrTasks})
     }
 }
 

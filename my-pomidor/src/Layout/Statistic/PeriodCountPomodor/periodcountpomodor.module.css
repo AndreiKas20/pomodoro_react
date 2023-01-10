@@ -1,0 +1,6 @@
+.block {
+    padding: 25px;
+    min-width: 296px;
+    height: 179px;
+    background-color: var(--whiteF4);
+}

@@ -78,17 +78,12 @@ export function ItemTask({taskItem}: IItemTask) {
             <div className={styles.leftSide}>
                 <span className={styles.count}>{taskItem.countPomodoro}</span>
                 {taskItem.textTask}
+
                 {
                     editInput &&
                     <div ref={inputEditRef} className={styles.editInput}>
                         <Input value={taskItem.textTask} changeValue={changeValue}/>
                     </div>
-                }
-                {
-                    taskItem.timeBreakTask
-                }
-                {
-                    taskItem.timeWorkTask
                 }
             </div>
             <ButtonDropdown onClick={onClick}/>

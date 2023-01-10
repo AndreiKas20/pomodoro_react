@@ -1,0 +1,13 @@
+.block {
+    /*min-width: 952px;*/
+    min-height: 450px;
+}
+.period {
+    height: 51px;
+    background-color: var(--whiteF4);
+}
+
+.graph {
+    height: 420px;
+    background-color: var(--greyEC);
+}

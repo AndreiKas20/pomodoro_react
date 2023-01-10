@@ -1,0 +1,29 @@
+.container {
+    padding: 100px 80px;
+}
+
+.blockTitleAndSelect {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.blockTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.blockTopLeft {
+    flex-basis: 32%;
+}
+
+.blockTopRight {
+    flex-basis: 66%;
+}
+
+.blockBottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

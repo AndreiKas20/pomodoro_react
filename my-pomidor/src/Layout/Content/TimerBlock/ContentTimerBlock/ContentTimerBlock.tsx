@@ -65,22 +65,18 @@ export const ContentTimerBlock = observer(() => {
             arrTaskStore.editAccept(idTask, arrStore.acceptedPomodoro)
             //----Добавление таски в массив сделанных (Всегда выше удаления!!)
             arrTaskStore.acceptTask(idTask, {
-                ...arrStore,
-                timeBreakTask: statItemBreak,
-                timeWorkTask: statItemWork,
-                id: generateRandomString()
-            })
+                    ...arrStore,
+                    timeBreakTask: statItemBreak,
+                    timeWorkTask: statItemWork,
+                    id: generateRandomString(),
+                },
+                {UTC: Date.now(), Date: new Date()}, arrStore.id)
             //----Удаление таски из массива задач при ее выполнении(Всегда ниже добавления таски в массив выполненного)
-            if(arrStore.countPomodoro === 1) {
-                setStatItemBreak(0)
-                setStatItemWork(0)
-                arrTaskStore.deleteTask(idTask)
-            }
+            setStatItemBreak(0)
+            setStatItemWork(0)
+            arrTaskStore.deleteTask(idTask)
         }
     }
-    useEffect(() => {
-        console.log('statistic', statisticBreak, statisticWork)
-    })
     useEffect(() => {
         if (second === 0 && minute === 0) {
             setTargetBreak(true)
@@ -143,15 +139,15 @@ export const ContentTimerBlock = observer(() => {
             if (target) {
                 arrTaskStore.editAccept(arrStore.id, arrStore.acceptedPomodoro)
                 arrTaskStore.countEditMinus(arrStore.id, arrStore.countPomodoro)
+                arrTaskStore.acceptTask(idTask, {
+                    ...arrStore,
+                    timeBreakTask: statItemBreak,
+                    timeWorkTask: statItemWork,
+                    id: generateRandomString()
+                }, {UTC: Date.now(), Date: new Date()}, arrStore.id)
+                setStatItemBreak(0)
+                setStatItemWork(0)
                 if (arrStore.countPomodoro === 1) {
-                    arrTaskStore.acceptTask(idTask, {
-                        ...arrStore,
-                        timeBreakTask: statItemBreak,
-                        timeWorkTask: statItemWork,
-                        id: generateRandomString()
-                    })
-                    setStatItemBreak(0)
-                    setStatItemWork(0)
                     arrTaskStore.deleteTask(idTask)
                 }
                 if (countBreak === 4) {

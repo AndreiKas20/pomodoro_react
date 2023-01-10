@@ -1,0 +1,5 @@
+.block {
+    flex-basis: 32%;
+    min-height: 179px;
+    background-color: var(--blueFF);
+}
