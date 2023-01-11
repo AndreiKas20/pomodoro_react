@@ -9,22 +9,27 @@ import styles from './statistic.module.css'
 import {Selector} from "./Selector";
 import arrTaskStore from "../../store/arrTaskStore";
 import {observer} from "mobx-react-lite";
-import {typesTaskComplete} from "../../../types/typesArrTask";
+import {useAdditionTime} from "../../hooks/useAdditionTime";
+import {useGetStatistic} from "../../hooks/useGetStatistic";
 
-export const Statistic = observer (() => {
-    const [arrMond, setArrMond] = useState(0)
-    const arr = arrTaskStore.acceptArr.filter(value => value.dateCompletion?.Date > new Date("2023-01-04"))
+export const Statistic = observer(() => {
+    const nowDate = new Date()
+    const nowDayWeek = nowDate.getDay()
+    const nowDayDate = nowDate.getDate()
+    const nowMonth = nowDate.getMonth() + 1
+    const nowYear = nowDate.getFullYear()
+    const dayStartInterval = nowDayDate - nowDayWeek + 1
+    const dayStart = new Date(`${nowYear}-${nowMonth}-${dayStartInterval}`)
+    const [arrMond, setArrMond] = useState<number>(0)
+    const arr = arrTaskStore.acceptArr.filter(value => value.dateCompletion?.Date > dayStart)
     const dayOne = arrTaskStore.acceptArr.filter(value => value.dateCompletion?.Date >= new Date("2023-01-04") && value.dateCompletion.Date <= new Date("2023-01-04"))
-    const fun = (value: typesTaskComplete) => {
-        if (value.timeWorkTask) {
-            setArrMond(value.timeWorkTask + arrMond)
-        }
-    }
-    console.log('sd', new Date("2023-01-03") === new Date("2023-01-03"))
-    useEffect(() => {
 
-        console.log('store arr', arrMond)
-    }, [arrMond])
+    // console.log('sd', arr)
+    const arrTime = useGetStatistic(arr, 7, dayStartInterval, 'timeWorkTask')
+    const monday = useAdditionTime(dayOne, 'timeWorkTask')
+    useEffect(() => {
+        console.log('store arr', arrTime)
+    }, [arrTime])
     return (
         <div className={styles.container}>
             <div className={styles.blockTitleAndSelect}>

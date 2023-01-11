@@ -28,3 +28,11 @@ export type typesTaskComplete = {
 }
 export type typesArrTask = Array<typesTask>
 export type typesArrTaskComplete = Array<typesTaskComplete>
+
+export type typeTaskAdditionName =
+    'countPomodoro' |
+    'acceptedPomodoro'|
+    'timeWorkAllTask'|
+    'timeBreakAllTask'|
+    'timeBreakTask'|
+    'timeWorkTask'

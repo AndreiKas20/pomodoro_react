@@ -11,16 +11,6 @@ class ArrayTask {
         {
             acceptedPomodoro: 3,
             idArrTasks: generateRandomString(),
-            textTask: 'slum 2023-01-09',
-            id: generateRandomString(),
-            dateCompletion: {UTC: 12, Date: new Date("2023-01-09")},
-            countPomodoro: 1,
-            timeBreakTask: 35,
-            timeWorkTask: 550,
-        },
-        {
-            acceptedPomodoro: 3,
-            idArrTasks: generateRandomString(),
             textTask: 'slum 2017-01-01',
             id: generateRandomString(),
             dateCompletion: {UTC: 12, Date: new Date("2023-01-01")},
@@ -75,14 +65,14 @@ class ArrayTask {
             dateCompletion: {UTC: 12, Date: new Date("2023-01-04")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 550,
+            timeWorkTask: 551,
         },
         {
             acceptedPomodoro: 3,
             idArrTasks: generateRandomString(),
-            textTask: 'slum 2017-01-07',
+            textTask: 'slum 2017-01-08',
             id: generateRandomString(),
-            dateCompletion: {UTC: 12, Date: new Date("2023-01-07")},
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-08")},
             countPomodoro: 1,
             timeBreakTask: 35,
             timeWorkTask: 550,
@@ -96,7 +86,17 @@ class ArrayTask {
             countPomodoro: 1,
             timeBreakTask: 35,
             timeWorkTask: 550,
-        }
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2023-01-09',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-09")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 550,
+        },
     ]
 
     constructor() {
