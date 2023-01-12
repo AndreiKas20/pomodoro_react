@@ -1,0 +1,8 @@
+.btn {
+    position: relative;
+    bottom: -20px;
+    width: 75px;
+    max-height: 400px;
+    background-color: var(--pinc79);
+    z-index: 3;
+}

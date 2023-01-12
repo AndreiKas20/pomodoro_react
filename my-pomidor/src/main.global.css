@@ -305,6 +305,7 @@ button {
   cursor: pointer;
 }
 
+
 input {
   border: none;
 }
@@ -314,4 +315,12 @@ button{
 }
 button:hover{
   transform: scale(1.065);
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:disabled:hover{
+  transform: none;
 }
