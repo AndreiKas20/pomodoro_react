@@ -65,7 +65,7 @@ class ArrayTask {
             dateCompletion: {UTC: 12, Date: new Date("2023-01-09")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 15000,
+            timeWorkTask: 15680,
         },
         {
             acceptedPomodoro: 3,
