@@ -38,7 +38,7 @@ export const Statistic = observer(() => {
             </div>
             <div className={styles.blockTop}>
                 <div className={styles.blockTopLeft}>
-                    <PeriodActive/>
+                    <PeriodActive arr={arrTime}/>
                     <PeriodCountPomodor/>
                 </div>
                 <div className={styles.blockTopRight}>

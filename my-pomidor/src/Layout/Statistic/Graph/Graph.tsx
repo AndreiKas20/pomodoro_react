@@ -3,6 +3,9 @@ import styles from './graph.module.css';
 import {arrTimeGraph} from "../../../hooks/useGetStatistic";
 import {Column} from "./Column";
 import {generateRandomString} from "../../../utils/getRandomString";
+import {observer} from "mobx-react-lite";
+import stateDayTarget from "../../../store/stateDayTarget";
+
 
 interface IGraph {
     arr: arrTimeGraph
@@ -11,11 +14,15 @@ interface IGraph {
     arrText: Array<any>
 }
 
-export function Graph(props: IGraph) {
+export const Graph = observer((props: IGraph) => {
     const timeOnePercent = props.maxIntervalTime / 100
     const [arr, setArr] = useState<arrTimeGraph>([])
-
+    const func = (id: any) => {
+        console.log('id num', id)
+        stateDayTarget.changeDayTarget(id)
+    }
     const [stateArrText, setStateArrText] = useState<Array<any>>([])
+
     useEffect(() => {
         setArr(props.arr)
         setStateArrText(props.arrText)
@@ -33,7 +40,15 @@ export function Graph(props: IGraph) {
                                              value={value}/>)
                 }
             </div>
-            <div className={styles.period}></div>
+            <div className={styles.dailyBlock}>
+                <button onClick={() => func(0)} className={styles.dailyPeriod}>Пн</button>
+                <button onClick={() => func(1)} className={styles.dailyPeriod}>Вт</button>
+                <button onClick={() => func(2)} className={styles.dailyPeriod}>Ср</button>
+                <button onClick={() => func(3)} className={styles.dailyPeriod}>Чт</button>
+                <button onClick={() => func(4)} className={styles.dailyPeriod}>Пт</button>
+                <button onClick={() => func(5)} className={styles.dailyPeriod}>Сб</button>
+                <button onClick={() => func(6)} className={styles.dailyPeriod}>Вс</button>
+            </div>
         </div>
     );
-}
+})

@@ -65,7 +65,7 @@ class ArrayTask {
             dateCompletion: {UTC: 12, Date: new Date("2023-01-09")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 10,
+            timeWorkTask: 15000,
         },
         {
             acceptedPomodoro: 3,
@@ -75,7 +75,7 @@ class ArrayTask {
             dateCompletion: {UTC: 12, Date: new Date("2023-01-10")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 105,
+            timeWorkTask: 6000,
         },
         {
             acceptedPomodoro: 3,
@@ -95,7 +95,7 @@ class ArrayTask {
             dateCompletion: {UTC: 12, Date: new Date("2023-01-11")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 98,
+            timeWorkTask: 4280,
         },
     ]
 

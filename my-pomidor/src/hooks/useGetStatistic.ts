@@ -5,7 +5,6 @@ export type timeGraph = {
     property?: typeTaskAdditionName
     time: number
     date?: Date
-    none?: boolean
 }
 export type arrTimeGraph = Array<timeGraph>
 

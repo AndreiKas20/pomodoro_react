@@ -12,7 +12,7 @@ export function Column({value, timeOnePercent}: IColumn) {
     // const heightColumn = Math.round(value.time / timeOnePercent)
     const [heightColumn, setHeightColumn] = useState<number>(0)
     const [colorBack, setColorBack] = useState<colorVar>()
-    const column = Math.round(value.time / timeOnePercent)
+    const column = Math.ceil(value.time / timeOnePercent)
     const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
