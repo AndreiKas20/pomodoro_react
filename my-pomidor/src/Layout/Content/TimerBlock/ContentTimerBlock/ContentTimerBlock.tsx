@@ -33,6 +33,7 @@ export const ContentTimerBlock = observer(() => {
     const arrStore = arrTaskStore.arrTask[0]
     const btnLeftStyle: styleBtn = {backgroundColor: 'var(--green4F)', color: 'var(--fullWhite)'}
     const btnLeftHover: styleBtn = {backgroundColor: "var(--green41)", color: "var(--fullWhite)"}
+    const [count, setCount] = useState(0)
     const clickStart = () => {
         if (!arrStore) {
             alert('Добавьте задачу')
@@ -62,7 +63,6 @@ export const ContentTimerBlock = observer(() => {
         if (stateTimer === "pause") {
             setStateTimer("stop")
             setClickLeftBtn(false)
-            arrTaskStore.editAccept(idTask, arrStore.acceptedPomodoro)
             //----Добавление таски в массив сделанных (Всегда выше удаления!!)
             arrTaskStore.acceptTask(idTask, {
                     ...arrStore,
@@ -70,7 +70,7 @@ export const ContentTimerBlock = observer(() => {
                     timeWorkTask: statItemWork,
                     id: generateRandomString(),
                 },
-                {UTC: Date.now(), Date: new Date()}, arrStore.id)
+                {UTC: Date.now(), Date: new Date()}, arrStore.id, 0)
             //----Удаление таски из массива задач при ее выполнении(Всегда ниже добавления таски в массив выполненного)
             setStatItemBreak(0)
             setStatItemWork(0)
@@ -102,7 +102,7 @@ export const ContentTimerBlock = observer(() => {
             }, 900);
             return () => clearInterval(timer);
         }
-    }, [clickLeftBtn, second, minute, breakTime])
+    }, [clickLeftBtn, second, minute, breakTime, arrStore ])
 
     useEffect(() => {
         if (arrStore) setIdTask(arrStore.id)
@@ -137,14 +137,16 @@ export const ContentTimerBlock = observer(() => {
         }
         if (stateTimer === 'break') {
             if (target) {
-                arrTaskStore.editAccept(arrStore.id, arrStore.acceptedPomodoro)
+                setCount(count + 1)
+                arrTaskStore.editAccept(arrStore.id, count)
+                console.log('count timer', count)
                 arrTaskStore.countEditMinus(arrStore.id, arrStore.countPomodoro)
                 arrTaskStore.acceptTask(idTask, {
                     ...arrStore,
                     timeBreakTask: statItemBreak,
                     timeWorkTask: statItemWork,
                     id: generateRandomString()
-                }, {UTC: Date.now(), Date: new Date()}, arrStore.id)
+                }, {UTC: Date.now(), Date: new Date()}, arrStore.id, 1)
                 setStatItemBreak(0)
                 setStatItemWork(0)
                 if (arrStore.countPomodoro === 1) {
@@ -184,7 +186,7 @@ export const ContentTimerBlock = observer(() => {
         }
         //-----Прокидываю состояние приложения в MobX
         stateTimerStore.changeSate(stateTimer)
-    }, [stateTimer, targetBreak, breakTime, target, countBreak])
+    }, [stateTimer, targetBreak, breakTime, target, countBreak, count])
 
     return (
         <div className={styles.block}>

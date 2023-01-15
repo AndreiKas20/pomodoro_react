@@ -21,12 +21,10 @@ export const HeaderTimerBlock = observer(() => {
         if (stateTimer === 'start') {
             setStyleHeader({backgroundColor: 'var(--red22)'})
             setTextCount("Помидор")
-            arrTaskStore.arrTask[0] ? setCount(arrTaskStore.arrTask[0].acceptedPomodoro + 1) : setCount(0)
         }
         if (stateTimer === 'stop') {
             setTextCount('Помидор')
             setStyleHeader({backgroundColor: 'var(--greyC4)'})
-            arrTaskStore.arrTask[0]? setCount(arrTaskStore.arrTask[0].acceptedPomodoro) : setCount(0)
         }
         if (stateTimer === 'break') {
             setStyleHeader({backgroundColor: "var(--green4F)"})

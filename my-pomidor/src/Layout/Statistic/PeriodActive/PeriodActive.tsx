@@ -11,9 +11,11 @@ interface IPeriod {
 export const PeriodActive = observer((props: IPeriod) => {
     const targetDay = stateDayTarget.dayTarget
     const [moreMinute, setMoreMinute] = useState(true)
+    const [triger, setTriger] = useState(true)
     const [timeTask, setTimeTask] = useState<number>(0)
     const [arr, setArr] = useState<arrTimeGraph>([])
     const [text, setText] = useState('')
+    const [infoDataText, setInfoDataText] = useState('')
     const dayArr = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
     const [textDay, setTextDay] = useState('')
     useEffect(() => {
@@ -22,10 +24,19 @@ export const PeriodActive = observer((props: IPeriod) => {
         console.log(arr)
         setTextDay(dayArr[targetDay])
         setTimeTask(arr[targetDay]?.time / 60)
+        if (arr[targetDay]?.time === 0) {
+            setInfoDataText('Нет данных')
+            setMoreMinute(false)
+            setTriger(false)
+        } else {
+            setTriger(true)
+            setMoreMinute(true)
+            setInfoDataText('Вы работали над задачами')
+        }
         if (timeTask < 60 && timeTask !== 0) {
-            if (timeTask <= 1) {
-                if (timeTask === 1) {
-                    setText(`${timeTask} минуты`)
+            if (Math.round(timeTask) < 2) {
+                if (Math.round(timeTask) === 1) {
+                    setText(`${Math.round(timeTask)} минуты`)
                 } else {
                     setMoreMinute(false)
                     setText('менее оной минуты')
@@ -61,10 +72,14 @@ export const PeriodActive = observer((props: IPeriod) => {
     return (
         <div className={styles.block}>
             <h2 className={styles.title}>{textDay}</h2>
-            <p className={styles.dayWeek}>Вы работали над задачами {moreMinute &&
-                <span>в течение</span>
-            } <span
-                style={{color: 'var(--red22)'}}>{text}</span></p>
+            <p className={styles.dayWeek}>{infoDataText}
+                {
+                    moreMinute && <span>в течение </span>
+                }
+                {
+                    triger && <span style={{color: 'var(--red22)'}}>{text}</span>
+                }
+            </p>
         </div>
     );
 })

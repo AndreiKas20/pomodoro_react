@@ -58,7 +58,7 @@ class ArrayTask {
             timeWorkTask: 550,
         },
         {
-            acceptedPomodoro: 3,
+            acceptedPomodoro: 29,
             idArrTasks: generateRandomString(),
             textTask: 'slum 2017-01-04',
             id: generateRandomString(),
@@ -78,24 +78,44 @@ class ArrayTask {
             timeWorkTask: 6000,
         },
         {
-            acceptedPomodoro: 3,
+            acceptedPomodoro: 0,
             idArrTasks: generateRandomString(),
             textTask: 'slum 2017-01-08',
             id: generateRandomString(),
             dateCompletion: {UTC: 12, Date: new Date("2023-01-11")},
-            countPomodoro: 1,
+            countPomodoro: 0,
             timeBreakTask: 1,
             timeWorkTask: 1,
+        },
+        {
+            acceptedPomodoro: 0,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2023-01-09',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-11")},
+            countPomodoro: 0,
+            timeBreakTask: 35,
+            timeWorkTask: 4280,
         },
         {
             acceptedPomodoro: 3,
             idArrTasks: generateRandomString(),
             textTask: 'slum 2023-01-09',
             id: generateRandomString(),
-            dateCompletion: {UTC: 12, Date: new Date("2023-01-11")},
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-12")},
             countPomodoro: 1,
             timeBreakTask: 35,
-            timeWorkTask: 4280,
+            timeWorkTask: 94,
+        },
+        {
+            acceptedPomodoro: 3,
+            idArrTasks: generateRandomString(),
+            textTask: 'slum 2023-01-09',
+            id: generateRandomString(),
+            dateCompletion: {UTC: 12, Date: new Date("2023-01-16")},
+            countPomodoro: 1,
+            timeBreakTask: 35,
+            timeWorkTask: 94,
         },
     ]
 
@@ -135,7 +155,7 @@ class ArrayTask {
     //----вторым параметром передаем прошлое значение выполненных помидоров
     editAccept(id: string, count: number) {
         count++
-        this.arrTask = this.arrTask.map(task => task.id === id ? {...task, acceptedPomodoro: count} : task)
+        this.arrTask = this.arrTask.map(task => task.id === id ? {...task, acceptedPomodoro: 1} : task)
     }
 
     //----С каждым переходом в паузу отрабатывает эта функция. Параметрами передаем:
@@ -143,8 +163,8 @@ class ArrayTask {
     // 2- Полный объект из старого массива
     // 3- Объект со свойствами Даты
     // 4- ID Из задачи из старого массива
-    acceptTask(id: string, task: typesTask, dateCompletion: dateType, idArrTasks: string) {
-        this.acceptArr.push({...task, dateCompletion, idArrTasks})
+    acceptTask(id: string, task: typesTask, dateCompletion: dateType, idArrTasks: string, acceptedPomodoro: number) {
+        this.acceptArr.push({...task, dateCompletion, idArrTasks, acceptedPomodoro})
     }
 }
 

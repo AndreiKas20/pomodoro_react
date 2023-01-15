@@ -23,7 +23,6 @@ export const DescriptionSection = observer(() => {
             countPomodoro: 1,
             textTask: taskStore.value,
             id: generateRandomString(),
-            acceptedPomodoro: 0
         })
         taskStore.updateValue('')
     }

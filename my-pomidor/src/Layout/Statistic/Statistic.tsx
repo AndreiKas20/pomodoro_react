@@ -23,6 +23,7 @@ export const Statistic = observer(() => {
     const dayStart = new Date(`${nowYear}-${nowMonth}-${dayStartInterval}`)
     const arr = arrTaskStore.acceptArr.filter(value => value.dateCompletion?.Date > dayStart)
     const arrTime = useGetStatistic(arr, 7, dayStartInterval, 'timeWorkTask')
+    const arrCountPomodor = useGetStatistic(arr,7, dayStartInterval, 'acceptedPomodoro')
     const arrText = useHoursMinute(maxIntervalTime)
     useEffect(() => {
         setMaxIntervalTime(Math.max(...arrTime.map(value => value.time)))
@@ -39,7 +40,7 @@ export const Statistic = observer(() => {
             <div className={styles.blockTop}>
                 <div className={styles.blockTopLeft}>
                     <PeriodActive arr={arrTime}/>
-                    <PeriodCountPomodor/>
+                    <PeriodCountPomodor arr={arrCountPomodor}/>
                 </div>
                 <div className={styles.blockTopRight}>
                     <Graph arrText={arrText} arr={arrTime} dailyInterval={7} maxIntervalTime={maxIntervalTime}/>
