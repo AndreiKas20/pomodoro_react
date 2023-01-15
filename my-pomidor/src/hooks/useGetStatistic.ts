@@ -16,10 +16,11 @@ export const useGetStatistic = (arr: typesArrTaskComplete, dailyInterval: number
     const nowYear = nowDate.getFullYear()
     let dayStop = dayStartInterval + dailyInterval
     useEffect(() => {
+        console.log('day start and interval' , dayStartInterval , dailyInterval)
         let __count = 0
         for (let i = dayStartInterval; dayStop > i; i++) {
 
-            const dailyArr = arr.filter(value => value.dateCompletion?.Date > new Date(`${nowYear}-${nowMonth}-${i}`) && value.dateCompletion?.Date < new Date(`${nowYear}-${nowMonth}-${i + 1}`))
+            const dailyArr = arr.filter(value => value.dateCompletion?.Date > new Date(`${nowYear}-${nowMonth}-${i + 1}`) && value.dateCompletion?.Date < new Date(`${nowYear}-${nowMonth}-${i + 2}`))
             if (dailyArr !== []) {
                 let __plus: number = 0
                 dailyArr.forEach((value) => {
@@ -28,7 +29,7 @@ export const useGetStatistic = (arr: typesArrTaskComplete, dailyInterval: number
                         __plus = __plus + value[property]
                     }
                 })
-                arrTime.push({property: property, time: __plus, date: new Date(`${nowYear}-${nowMonth}-${i}`), countDay: __count++})
+                arrTime.push({property: property, time: __plus, date: new Date(`${nowYear}-${nowMonth}-${i + 1}`), countDay: __count++})
                 __plus = 0
             }
         }

@@ -97,26 +97,6 @@ class ArrayTask {
             timeBreakTask: 35,
             timeWorkTask: 4280,
         },
-        {
-            acceptedPomodoro: 3,
-            idArrTasks: generateRandomString(),
-            textTask: 'slum 2023-01-09',
-            id: generateRandomString(),
-            dateCompletion: {UTC: 12, Date: new Date("2023-01-12")},
-            countPomodoro: 1,
-            timeBreakTask: 35,
-            timeWorkTask: 94,
-        },
-        {
-            acceptedPomodoro: 3,
-            idArrTasks: generateRandomString(),
-            textTask: 'slum 2023-01-09',
-            id: generateRandomString(),
-            dateCompletion: {UTC: 12, Date: new Date("2023-01-16")},
-            countPomodoro: 1,
-            timeBreakTask: 35,
-            timeWorkTask: 94,
-        },
     ]
 
     constructor() {

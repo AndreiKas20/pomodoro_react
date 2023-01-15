@@ -11,15 +11,17 @@ import arrTaskStore from "../../store/arrTaskStore";
 import {observer} from "mobx-react-lite";
 import {useGetStatistic} from "../../hooks/useGetStatistic";
 import {useHoursMinute} from "../../hooks/useHoursMinute";
+import * as Console from "console";
 
 export const Statistic = observer(() => {
     const nowDate = new Date()
     const [maxIntervalTime, setMaxIntervalTime] = useState(0)
     const nowDayWeek = nowDate.getDay()
+    const [day, setDay] = useState<number>(0)
     const nowDayDate = nowDate.getDate()
     const nowMonth = nowDate.getMonth() + 1
     const nowYear = nowDate.getFullYear()
-    const dayStartInterval = nowDayDate - nowDayWeek + 1
+    const dayStartInterval = nowDayDate - day
     const dayStart = new Date(`${nowYear}-${nowMonth}-${dayStartInterval}`)
     const arr = arrTaskStore.acceptArr.filter(value => value.dateCompletion?.Date > dayStart)
     const arrTime = useGetStatistic(arr, 7, dayStartInterval, 'timeWorkTask')
@@ -28,7 +30,14 @@ export const Statistic = observer(() => {
     useEffect(() => {
         setMaxIntervalTime(Math.max(...arrTime.map(value => value.time)))
     }, [arrTime, maxIntervalTime])
-
+    useEffect(()=>{
+        if (nowDayWeek === 0) {
+            setDay(7)
+        } else {
+            setDay(nowDayWeek)
+        }
+    }, [nowDayWeek])
+    console.log('now day', nowDayWeek)
     return (
         <div className={styles.container}>
             <div className={styles.blockTitleAndSelect}>

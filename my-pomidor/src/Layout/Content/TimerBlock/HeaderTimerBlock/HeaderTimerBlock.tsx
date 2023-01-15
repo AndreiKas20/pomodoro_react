@@ -21,6 +21,7 @@ export const HeaderTimerBlock = observer(() => {
         if (stateTimer === 'start') {
             setStyleHeader({backgroundColor: 'var(--red22)'})
             setTextCount("Помидор")
+            setCount(count + 1)
         }
         if (stateTimer === 'stop') {
             setTextCount('Помидор')
