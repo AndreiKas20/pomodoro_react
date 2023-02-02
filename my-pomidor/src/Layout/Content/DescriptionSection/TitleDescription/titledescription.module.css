@@ -4,3 +4,10 @@
     line-height: 33px;
     color: var(--black);
 }
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black);
+}

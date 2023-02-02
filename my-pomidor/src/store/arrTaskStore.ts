@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import {dateType, typesArrTask, typesArrTaskComplete, typesTask} from "../../types/typesArrTask";
-import {generateRandomString} from "../utils/getRandomString";
 
 
 class ArrayTask {
