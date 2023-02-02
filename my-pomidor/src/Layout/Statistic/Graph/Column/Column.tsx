@@ -20,7 +20,6 @@ export const Column = observer(({value, timeOnePercent}: IColumn) => {
     const arrDay = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
     const day = stateDayTarget.dayTarget
     const func = (id: any) => {
-        console.log('id num', id)
         stateDayTarget.changeDayTarget(id)
         setOnTarget(!onTarget)
     }

@@ -3,7 +3,7 @@ import React from 'react';
 interface IIcon {
     width?: string
     noActive?: boolean
-    hidth?: string
+    height?: string
 }
 
 export function IconPlus(props: IIcon) {

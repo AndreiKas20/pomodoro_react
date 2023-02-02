@@ -21,7 +21,6 @@ export const PeriodActive = observer((props: IPeriod) => {
     useEffect(() => {
         setMoreMinute(true)
         setArr(props.arr)
-        console.log(arr)
         setTextDay(dayArr[targetDay])
         setTimeTask(arr[targetDay]?.time / 60)
         if (arr[targetDay]?.time === 0) {
@@ -53,7 +52,6 @@ export const PeriodActive = observer((props: IPeriod) => {
             __hourFloor = Math.floor(__hour)
             __minuteF = __hour - __hourFloor
             __minute = Math.round(__minuteF * 60)
-            console.log(__minute)
             if (__hourFloor === 1 || __hourFloor === 21) {
                 if (__minute === 1 || __minute === 21) {
                     setText(`${__hourFloor} часа и ${__minute} минуты`)

@@ -5,7 +5,7 @@ import {DropdownMenu} from "../../../../../UI/DropdownMenu";
 import {typesTask} from "../../../../../../types/typesArrTask";
 import arrTaskStore from "../../../../../store/arrTaskStore";
 import {Input} from "../../../../../UI/Input";
-
+import {ModalDelete} from "../../../../../UI/ModalDelete";
 interface IItemTask {
     taskItem: typesTask
 }
@@ -17,6 +17,7 @@ export function ItemTask({taskItem}: IItemTask) {
     const listRef = useRef<HTMLLIElement>(null)
     const inputEditRef = useRef<HTMLDivElement>(null)
     const listDropRef = useRef<HTMLDivElement>(null)
+    const [isOpenModal, setIsOpenModal] = useState(false)
     const onClick = () => {
         setDropdown(!dropdown)
     }
@@ -64,6 +65,9 @@ export function ItemTask({taskItem}: IItemTask) {
         arrTaskStore.countEditMinus(taskItem.id, taskItem.countPomodoro)
     }
     const deleteTask = () => {
+        setIsOpenModal(true)
+    }
+    const modalDeleteTask = () => {
         arrTaskStore.deleteTask(taskItem.id)
     }
     useEffect(() => {
@@ -72,7 +76,9 @@ export function ItemTask({taskItem}: IItemTask) {
             document.removeEventListener('click', handleClick)
         }
     })
-
+    const closeModal = () => {
+        setIsOpenModal(false)
+    }
     return (
         <li ref={listRef} className={styles.item}>
             <div className={styles.leftSide}>
@@ -87,13 +93,18 @@ export function ItemTask({taskItem}: IItemTask) {
                 }
             </div>
             <ButtonDropdown onClick={onClick}/>
+                {
+                    dropdown &&
+                    <div className={styles.dropPosition} ref={listDropRef}>
+                        <DropdownMenu clickEdit={clickEdit} noActive={disabledMin} deleteTask={deleteTask}
+                                      clickMinus={clickMinus}
+                                      clickPlus={clickPlus}/>
+                    </div>
+                }
+
             {
-                dropdown &&
-                <div className={styles.dropPosition} ref={listDropRef}>
-                    <DropdownMenu clickEdit={clickEdit} noActive={disabledMin} deleteTask={deleteTask}
-                                  clickMinus={clickMinus}
-                                  clickPlus={clickPlus}/>
-                </div>
+                isOpenModal &&
+               <ModalDelete clickDelete={modalDeleteTask} clickClose={closeModal}/>
             }
         </li>
     );

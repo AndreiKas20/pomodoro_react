@@ -6,8 +6,23 @@ import {IconPomidor} from "../Icons/IconPomidor";
 import {IconRedactor} from "../Icons/IconRedactor";
 import {IconStatistic} from "../Icons/IconStatistic";
 import {PomodorNoData} from "../Icons/PomodorNoData";
+import {IconFocus} from "../Icons/IconFocus";
+import {IconTimeBrake} from "../Icons/IconTimeBrake";
+import {IconStops} from "../Icons/IconStops";
+import {Setting} from "../Icons/Setting";
 
-type nameIcon = 'IconMinus' | 'IconDelete' | 'IconPlus' | 'IconPomidor' | 'IconRedactor' | 'IconStatistic' | 'PomodorNoData'
+type nameIcon =
+    'IconMinus'
+    | 'IconDelete'
+    | 'IconPlus'
+    | 'IconPomidor'
+    | 'IconRedactor'
+    | 'IconStatistic'
+    | 'PomodorNoData'
+    | 'IconFocus'
+    | 'IconStops'
+    | 'IconTimeBrake'
+    | 'Setting'
 
 interface IIcon {
     nameIcon: nameIcon
@@ -19,41 +34,61 @@ interface IIcon {
 export function Icon({nameIcon, height, width, noActive}: IIcon) {
     if (nameIcon === 'IconMinus') {
         return (
-            <IconMinus width={width} hidth={height} noActive={noActive}/>
+            <IconMinus width={width} height={height} noActive={noActive}/>
         )
     }
     if (nameIcon === 'IconDelete') {
         return (
-            <IconDelete width={width} hidth={height} noActive={noActive}/>
+            <IconDelete width={width} height={height} noActive={noActive}/>
         )
     }
     if (nameIcon === 'IconPlus') {
         return (
-            <IconPlus width={width} hidth={height} noActive={noActive}/>
+            <IconPlus width={width} height={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconPomidor') {
         return (
-            <IconPomidor width={width} hidth={height} noActive={noActive}/>
+            <IconPomidor width={width} height={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconRedactor') {
         return (
-            <IconRedactor width={width} hidth={height} noActive={noActive}/>
+            <IconRedactor width={width} height={height} noActive={noActive}/>
         )
     }
 
     if (nameIcon === 'IconStatistic') {
         return (
-            <IconStatistic width={width} hidth={height} />
+            <IconStatistic width={width} height={height}/>
         )
     }
 
     if (nameIcon === 'PomodorNoData') {
         return (
-            <PomodorNoData width={width} hidth={height} />
+            <PomodorNoData width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'IconFocus') {
+        return (
+            <IconFocus width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'IconTimeBrake') {
+        return (
+            <IconTimeBrake width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'IconStops') {
+        return (
+            <IconStops width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'Setting') {
+        return (
+            <Setting width={width} height={height}/>
         )
     }
     return (

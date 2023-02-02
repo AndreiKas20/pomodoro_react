@@ -8,7 +8,7 @@ class StateTimer {
         makeAutoObservable(this)
     }
 
-    changeSate(newSate: typeStateTimer) {
+    changeState(newSate: typeStateTimer) {
         this.stateTimer = newSate
     }
 }

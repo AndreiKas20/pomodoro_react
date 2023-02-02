@@ -10,7 +10,6 @@ export function TimerBlock() {
             <div className={styles.content}>
                 <ContentTimerBlock/>
             </div>
-
         </div>
     );
 }

@@ -10,6 +10,7 @@ import {styleBtn} from "../../../../../types/colorTypes";
 import {typeStateTimer} from "../../../../../types/typeStateTimer";
 import arrTaskStore from "../../../../store/arrTaskStore";
 import {generateRandomString} from "../../../../utils/getRandomString";
+import addNotification from 'react-push-notification';
 
 export const ContentTimerBlock = observer(() => {
     const [second, setSecond] = useState(5)
@@ -31,9 +32,37 @@ export const ContentTimerBlock = observer(() => {
     const [statItemWork, setStatItemWork] = useState(0)
     const [statItemBreak, setStatItemBreak] = useState(0)
     const arrStore = arrTaskStore.arrTask[0]
+    const acceptArr = arrTaskStore.acceptArr
     const btnLeftStyle: styleBtn = {backgroundColor: 'var(--green4F)', color: 'var(--fullWhite)'}
     const btnLeftHover: styleBtn = {backgroundColor: "var(--green41)", color: "var(--fullWhite)"}
     const [count, setCount] = useState(0)
+    const saveLocal = () => {
+        localStorage.acceptArr = JSON.stringify(acceptArr)
+        console.log('save', JSON.parse(localStorage.acceptArr))
+    }
+    useEffect(() => {
+        saveLocal()
+    }, [acceptArr])
+
+    const workTimeout = () => {
+        addNotification({
+            title: 'Таймер',
+            subtitle: 'Рабочее время таймера закончилось',
+            message: 'Рабочее время таймера закончилось начался перерыв',
+            duration: 5000,
+            native: true
+        });
+    };
+
+    const brakeTimeout = () => {
+        addNotification({
+            title: 'Таймер',
+            subtitle: 'Время перерыва закончилось',
+            message: 'Время перерыва закончилось пора приступать к работе',
+            duration: 5000,
+            native: true
+        });
+    };
     const clickStart = () => {
         if (!arrStore) {
             alert('Добавьте задачу')
@@ -64,13 +93,15 @@ export const ContentTimerBlock = observer(() => {
             setStateTimer("stop")
             setClickLeftBtn(false)
             //----Добавление таски в массив сделанных (Всегда выше удаления!!)
+
             arrTaskStore.acceptTask(idTask, {
                     ...arrStore,
                     timeBreakTask: statItemBreak,
                     timeWorkTask: statItemWork,
                     id: generateRandomString(),
                 },
-                {UTC: Date.now(), Date: new Date()}, arrStore.id, 0)
+                {UTC: Date.now(), Date: new Date()}, arrStore.id, 0, 0)
+            saveLocal()
             //----Удаление таски из массива задач при ее выполнении(Всегда ниже добавления таски в массив выполненного)
             setStatItemBreak(0)
             setStatItemWork(0)
@@ -102,7 +133,7 @@ export const ContentTimerBlock = observer(() => {
             }, 900);
             return () => clearInterval(timer);
         }
-    }, [clickLeftBtn, second, minute, breakTime, arrStore ])
+    }, [clickLeftBtn, second, minute, breakTime, arrStore])
 
     useEffect(() => {
         if (arrStore) setIdTask(arrStore.id)
@@ -112,21 +143,31 @@ export const ContentTimerBlock = observer(() => {
         }
         if (!breakTime && targetBreak) {
             setStateTimer("start")
+            brakeTimeout()
             setMinute(0)
             setSecond(6)
             setTargetBreak(false)
         }
         if (stateTimer === 'pause') {
+            arrTaskStore.acceptTask(idTask, {
+                ...arrStore,
+                timeBreakTask: 0,
+                timeWorkTask: 0,
+                id: generateRandomString()
+            }, {UTC: Date.now(), Date: new Date()}, arrStore.id, 0, 1)
+            saveLocal()
             setColorTimer({color: "var(--black)"})
             setBtnLeftName('Продолжить')
             setBtnRightName('Сделано')
         }
         if (stateTimer === 'start') {
             if (!arrStore) {
+
                 setStateTimer('stop')
                 setClickLeftBtn(false)
                 alert('Задачи кончились')
             } else {
+
                 setBreakTime(true)
                 setBtnLeftName('Пауза')
                 setBtnRightName('Стоп')
@@ -146,7 +187,9 @@ export const ContentTimerBlock = observer(() => {
                     timeBreakTask: statItemBreak,
                     timeWorkTask: statItemWork,
                     id: generateRandomString()
-                }, {UTC: Date.now(), Date: new Date()}, arrStore.id, 1)
+                }, {UTC: Date.now(), Date: new Date()}, arrStore.id, 1, 1)
+                workTimeout()
+                saveLocal()
                 setStatItemBreak(0)
                 setStatItemWork(0)
                 if (arrStore.countPomodoro === 1) {
@@ -185,9 +228,8 @@ export const ContentTimerBlock = observer(() => {
             setBtnRightName('Пропустить')
         }
         //-----Прокидываю состояние приложения в MobX
-        stateTimerStore.changeSate(stateTimer)
+        stateTimerStore.changeState(stateTimer)
     }, [stateTimer, targetBreak, breakTime, target, countBreak, count])
-
     return (
         <div className={styles.block}>
             <Timer style={colorTimer} second={second} minute={minute}/>
@@ -206,5 +248,6 @@ export const ContentTimerBlock = observer(() => {
                 <ButtonEllipse onClick={clickBtnAdd}/>
             </div>
         </div>
+
     );
 })

@@ -14,7 +14,6 @@ export const PeriodCountPomodor = observer((props: IPeriod) => {
     const [arr, setArr] = useState<arrTimeGraph>([])
     const [noData, setNoData] = useState(false)
     const [count, setCount] = useState(0)
-    const [countText, setCountText] = useState('')
     const [textPomodor, setTextPomodor] = useState('')
     useEffect(() => {
         setArr(props.arr)
@@ -30,7 +29,6 @@ export const PeriodCountPomodor = observer((props: IPeriod) => {
             __lastNum = __textNum.at(-1)
             __lastNum = Number(__lastNum)
             setNoData(false)
-            console.log('count',count, countText, __lastNum, arr)
             if (__lastNum === 1 && count !== 11) {
                 setTextPomodor('Помидор')
             } else if (count === 10 || count === 11 || count === 12 || count === 13 || count === 14) {

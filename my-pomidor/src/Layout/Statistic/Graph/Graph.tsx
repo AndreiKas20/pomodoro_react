@@ -4,8 +4,6 @@ import {arrTimeGraph} from "../../../hooks/useGetStatistic";
 import {Column} from "./Column";
 import {generateRandomString} from "../../../utils/getRandomString";
 import {observer} from "mobx-react-lite";
-import stateDayTarget from "../../../store/stateDayTarget";
-
 
 interface IGraph {
     arr: arrTimeGraph

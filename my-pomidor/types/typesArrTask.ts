@@ -24,6 +24,7 @@ export type typesTaskComplete = {
     timeWorkTask?: number
     dateCompletion: dateType
     idArrTasks?: string
+    countBrake?: number
 }
 export type typesArrTask = Array<typesTask>
 export type typesArrTaskComplete = Array<typesTaskComplete>
@@ -34,4 +35,5 @@ export type typeTaskAdditionName =
     'timeWorkAllTask'|
     'timeBreakAllTask'|
     'timeBreakTask'|
-    'timeWorkTask'
+    'timeWorkTask' |
+    'countBrake'

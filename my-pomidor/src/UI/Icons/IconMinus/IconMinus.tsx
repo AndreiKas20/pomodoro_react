@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IIcon {
     width?: string
-    hidth?: string
+    height?: string
     noActive?: boolean
 }
 

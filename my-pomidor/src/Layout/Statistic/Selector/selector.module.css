@@ -1,5 +1,43 @@
 .block {
-    padding: 19px 15px;
+    position: absolute;
+    right: 80px;
     width: 370px;
+    z-index: 5;
     background-color: var(--whiteF4);
+    box-shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+}
+
+.item {
+    position: relative;
+    width: 100%;
+}
+.headStyle {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 15px;
+    width: 100%;
+}
+.item:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-color: var(--greyC4);
+}
+
+.text {
+    text-align: left;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--black);
+}
+
+.btn {
+    padding: 20px 15px;
+    width: 100%;
+    height: 100%;
+    text-align: left;
 }

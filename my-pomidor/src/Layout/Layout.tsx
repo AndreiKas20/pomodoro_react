@@ -7,7 +7,7 @@ import {Route, Routes} from "react-router-dom";
 
 export function Layout() {
     return (
-        <div className='layout'>
+        <div className='layout' >
             <Header/>
             <Routes>
                 <Route path={'/'} element={<Content/>}/>

@@ -1,5 +1,6 @@
 import {typesArrTaskComplete, typeTaskAdditionName} from "../../types/typesArrTask";
 import {useEffect, useState} from "react";
+import arrTaskStore from "../store/arrTaskStore";
 
 export type timeGraph = {
     property?: typeTaskAdditionName
@@ -9,18 +10,12 @@ export type timeGraph = {
 }
 export type arrTimeGraph = Array<timeGraph>
 
-export const useGetStatistic = (arr: typesArrTaskComplete, dailyInterval: number, dayStartInterval: number, property: typeTaskAdditionName) => {
-    const nowDate = new Date()
+export const useGetStatistic = (arr: typesArrTaskComplete, dailyInterval: number, dayStartInterval: Date, property: typeTaskAdditionName, dayStop: Date) => {
     let arrTime: arrTimeGraph = []
-    const nowMonth = nowDate.getMonth() + 1
-    const nowYear = nowDate.getFullYear()
-    let dayStop = dayStartInterval + dailyInterval
     useEffect(() => {
-        console.log('day start and interval' , dayStartInterval , dailyInterval)
         let __count = 0
-        for (let i = dayStartInterval; dayStop > i; i++) {
-
-            const dailyArr = arr.filter(value => value.dateCompletion?.Date > new Date(`${nowYear}-${nowMonth}-${i + 1}`) && value.dateCompletion?.Date < new Date(`${nowYear}-${nowMonth}-${i + 2}`))
+        for (let i = dayStartInterval; dayStop >= i; i.setDate(i.getDate() + 1)) {
+            const dailyArr = arr.filter(value => new Date(value.dateCompletion?.Date).getDate() === i.getDate() && new Date(value.dateCompletion?.Date).getMonth() === i.getMonth() )
             if (dailyArr !== []) {
                 let __plus: number = 0
                 dailyArr.forEach((value) => {
@@ -29,10 +24,10 @@ export const useGetStatistic = (arr: typesArrTaskComplete, dailyInterval: number
                         __plus = __plus + value[property]
                     }
                 })
-                arrTime.push({property: property, time: __plus, date: new Date(`${nowYear}-${nowMonth}-${i + 1}`), countDay: __count++})
+                arrTime.push({property: property, time: __plus, date: new Date(i), countDay: __count++})
                 __plus = 0
             }
         }
-    })
+    },[arr, dayStartInterval, dailyInterval, property, dayStop, arrTaskStore.acceptArr])
     return arrTime
 }

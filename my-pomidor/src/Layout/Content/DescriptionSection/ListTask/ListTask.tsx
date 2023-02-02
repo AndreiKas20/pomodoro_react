@@ -6,9 +6,9 @@ import arrTaskStore from "../../../../store/arrTaskStore";
 export const ListTask = observer(() => {
     return (
         <ul>
-            {
-                arrTaskStore.arrTask.map(value => <ItemTask key={value.id} taskItem={value}/>)
-            }
+                {
+                    arrTaskStore.arrTask.map(value => <ItemTask key={value.id} taskItem={value}/>)
+                }
         </ul>
     );
 })
