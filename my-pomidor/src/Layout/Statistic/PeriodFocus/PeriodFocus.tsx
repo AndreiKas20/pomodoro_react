@@ -3,7 +3,6 @@ import styles from './periodfocus.module.css';
 import {observer} from "mobx-react-lite";
 import stateDayTarget from "../../../store/stateDayTarget";
 import {arrTimeGraph} from "../../../hooks/useGetStatistic";
-import {IconFocus} from "../../../UI/Icons/IconFocus";
 import {Icon} from "../../../UI/Icon";
 
 interface IFocus {
@@ -17,15 +16,18 @@ export const PeriodFocus = observer((props: IFocus) => {
     const [timeWork, setTimeWork] = useState<number>(0)
     const [timeBrake, setTimeBrake] = useState<number>(0)
     const [focus, setFocus] = useState(0)
-
     const targetDay = stateDayTarget.dayTarget
     useEffect(() => {
         setArrBrake(props.arrBrake)
         setArrWork(props.arrWork)
         setTimeBrake(arrBrake[targetDay]?.time)
         setTimeWork(arrWork[targetDay]?.time)
-        setFocus(Math.round((100 / (timeWork + timeBrake)) * timeWork))
-        if (!timeWork || !timeBrake) {
+        if (!timeBrake && timeWork) {
+            setFocus(100)
+        } else {
+            setFocus(Math.round((100 / (timeWork + timeBrake)) * timeWork))
+        }
+        if (!timeWork && !timeBrake) {
             setFocus(0)
         }
 

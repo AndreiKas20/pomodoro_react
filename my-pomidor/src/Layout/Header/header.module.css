@@ -10,31 +10,222 @@
     padding: 20px 80px;
     box-shadow: var(--shadow);
 }
+
 .iconBlock {
     display: flex;
     margin-right: auto;
 }
 
+.iconBlock:active .title{
+    color: var(--black);
+}
+
+
 .title {
     position: relative;
     top: -8px;
+    left: 54px;
     font-weight: 300;
     font-size: 24px;
     line-height: 24px;
     text-align: center;
     color: var(--red22);
+    animation: animationTitle .3s ease-in-out;
+    animation-delay: 1.3s;
+    transition: color .3s ease-in-out;
+}
+
+.title:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: var(--red22);
+    transition: width .3s ease-in-out;
+}
+
+
+
+@keyframes animationTitle {
+    0% {
+        left: 54px;
+    }
+
+    100% {
+        left: 60px;
+    }
 }
 
 .iconPomidor {
-    margin-right: 18px;
+    position: absolute;
+    left: 80px;
+    animation: animationPomidor 1.5s linear;
+    transition: transform .4s ease-in-out;
+}
+
+.iconBlock:hover .iconPomidor{
+    transform: scale(1.3);
+}
+
+.iconBlock:hover .title:before{
+    width: 100%;
+}
+
+@keyframes animationPomidor {
+    0% {
+        transform: rotate(0);
+        left: 80px;
+    }
+
+    50% {
+        transform: rotate(-360deg);
+        left: 6px;
+    }
+    90% {
+        left: 97px;
+        transform: rotate(88deg);
+    }
+    100% {
+        left: 80px;
+        transform: rotate(0);
+    }
 }
 
 .iconStatistic {
-    display: inline;
-    margin-right: 9px;
+    display: block;
+    position: relative;
+    top: 5px;
+    left: -15px;
+    width: 4px;
+    height: 16px;
+    background-color: var(--red22);
+}
+.linkBlock {
+    padding: 15px;
+}
+
+.linkBlock:hover {
+    transform: none;
+}
+.iconStatistic:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    left: -6px;
+    bottom: 0;
+    background-color: var(--red22);
+    transition: height .3s ease-in-out;
+}
+
+.iconStatistic:before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 11px;
+    right: -6px;
+    bottom: 0;
+    background-color: var(--red22);
+    transition: height .3s ease-in-out;
+}
+.linkBlock:hover .iconStatistic {
+    animation: hoverAnimation1 .6s ease-in-out;
+}
+
+.linkBlock:hover .textBtn {
+    animation: textLink .6s ease-in-out;
+}
+
+.linkBlock:hover .iconStatistic:after {
+    animation: hoverAnimation2 .6s ease-in-out;
+}
+
+.linkBlock:hover .iconStatistic:before {
+    animation: hoverAnimation3 .6s ease-in-out;
+}
+
+.linkBlock:active .iconStatistic:after {
+    height: 100%;
+}
+
+.linkBlock:active .iconStatistic:before {
+    height: 100%;
+}
+
+@keyframes hoverAnimation1 {
+    0% {
+        transform: scaleY(1);
+    }
+    33% {
+        transform: scaleY(.5);
+        bottom: -8px;
+    }
+    66% {
+        transform: scaleY(1.5);
+        bottom: 8px;
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes hoverAnimation2 {
+    0% {
+        transform: scaleY(1);
+    }
+    33% {
+        transform: scaleY(1.5);
+        bottom: -4px;
+    }
+    66% {
+        transform: scaleY(0.5);
+        bottom: 0px;
+    }
+    100% {
+        transform: scaleY(1);
+        bottom: 0;
+    }
+}
+
+@keyframes hoverAnimation3 {
+    0% {
+        transform: scaleY(1);
+    }
+    33% {
+        transform: scaleY(0.5);
+        bottom: -5.5px;
+    }
+    66% {
+        transform: scaleY(1.5);
+        bottom: 5px;
+    }
+    100% {
+        transform: scaleY(1);
+        bottom: 0;
+    }
+}
+
+@keyframes textLink {
+    0% {
+        transform: scaleX(1);
+    }
+    25% {
+         transform: scaleX(1.2);
+    }
+
+    50% {
+        transform: scaleX(.7);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
 }
 
 .textBtn {
+    display: inline-block;
     position: relative;
     top: -8px;
     font-weight: 400;
@@ -45,9 +236,41 @@
 
 .toggleSwitch {
     position: absolute;
-    right: 0;
-    top: 70px;
+    right: 240px;
+    top: 40px;
     width: 200px;
+}
+.advTextCheck {
+    position: absolute;
+    display: block;
+    padding: 5px;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 100%;
+    top: -90px;
+    color: var(--fullWhite);
+    background-color: var(--green4F);
+    z-index: 3;
+    transform: scale(2);
+    opacity: 0;
+    transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+    visibility: hidden;
+}
+
+.advTextCheck:after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: calc(50% - 2px);
+    bottom: -2px;
+    background-color: var(--green4F);
+    transform: rotate(45deg) ;
+    z-index: -1;
+}
+.toggleSwitch:hover .advTextCheck{
+    opacity: 1;
+    visibility: visible;
 }
 
 label {
@@ -98,6 +321,6 @@ input:checked ~ .slider::before {
 
 .btnSetting {
     position: absolute;
-    right: 160px;
-    top: 60px;
+    right: 220px;
+    top: 30px;
 }

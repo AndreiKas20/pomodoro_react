@@ -10,6 +10,8 @@ import {IconFocus} from "../Icons/IconFocus";
 import {IconTimeBrake} from "../Icons/IconTimeBrake";
 import {IconStops} from "../Icons/IconStops";
 import {Setting} from "../Icons/Setting";
+import {IconAlert} from "../Icons/IconAlert";
+import {IconNoAlert} from "../Icons/IconNoAlert";
 
 type nameIcon =
     'IconMinus'
@@ -23,6 +25,8 @@ type nameIcon =
     | 'IconStops'
     | 'IconTimeBrake'
     | 'Setting'
+    | 'IconAlert'
+    | 'IconNoAlert'
 
 interface IIcon {
     nameIcon: nameIcon
@@ -89,6 +93,16 @@ export function Icon({nameIcon, height, width, noActive}: IIcon) {
     if (nameIcon === 'Setting') {
         return (
             <Setting width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'IconAlert') {
+        return (
+            <IconAlert width={width} height={height}/>
+        )
+    }
+    if (nameIcon === 'IconNoAlert') {
+        return (
+            <IconNoAlert width={width} height={height}/>
         )
     }
     return (

@@ -38,7 +38,7 @@ export const PeriodActive = observer((props: IPeriod) => {
                     setText(`${Math.round(timeTask)} минуты`)
                 } else {
                     setMoreMinute(false)
-                    setText('менее оной минуты')
+                    setText(' менее оной минуты')
                 }
             } else {
                 setText(`${Math.round(timeTask)} минут`)

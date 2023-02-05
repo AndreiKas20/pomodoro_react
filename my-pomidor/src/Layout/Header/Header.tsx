@@ -1,16 +1,14 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {Icon} from "../../UI/Icon";
 import styles from './header.module.css'
 import {observer} from "mobx-react-lite";
 import {Link} from "react-router-dom";
 import {useTheme} from "../../hooks/useTheme";
-import {Input} from "../../UI/Input";
-import {Button} from "../../UI/Button";
 import {ModalSetting} from "../../UI/ModalSetting";
 import {Setting} from "../../UI/Icons/Setting";
 
 export const Header = observer(() => {
-    const {theme, setTheme} = useTheme()
+    const setTheme = useTheme()
     const check = useRef<HTMLInputElement>(null)
     const [startChecked, setStartChecked] = useState(false)
     const stateTheme = localStorage.getItem('theme')
@@ -37,10 +35,7 @@ export const Header = observer(() => {
         } else {
             setStartChecked(true)
         }
-
-    }, [])
-
-    console.log('render Header')
+    }, [stateTheme])
     return (
         <div className={styles.block}>
             <Link className={styles.iconBlock} to={'/'}>
@@ -51,6 +46,7 @@ export const Header = observer(() => {
             </Link>
             <div className={styles.toggleSwitch} style={{transform: 'scale(.20)'}}>
                 <label>
+                    <span className={styles.advTextCheck}>Выбор темы</span>
                     <input className={styles.input} ref={check} onChange={setDark} checked={startChecked}
                            type='checkbox'></input>
                     <span className={styles.slider}></span>
@@ -58,12 +54,10 @@ export const Header = observer(() => {
             </div>
             <button className={styles.linkBlock}>
                 <Link to={'statistic'}>
-                    <div className={styles.iconStatistic}>
-                        <Icon nameIcon={'IconStatistic'}></Icon>
-                    </div>
+                    <span className={styles.iconStatistic}></span>
                     <span className={styles.textBtn}>
                     Статистика
-                </span>
+                    </span>
                 </Link>
             </button>
             <button className={styles.btnSetting} onClick={clickSetting}>

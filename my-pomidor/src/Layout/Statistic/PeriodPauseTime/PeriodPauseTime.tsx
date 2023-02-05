@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import styles from './periodpausetime.module.css';
 import {arrTimeGraph} from "../../../hooks/useGetStatistic";
 import {observer} from "mobx-react-lite";
@@ -13,12 +13,15 @@ interface IPause {
 export const PeriodPauseTime = observer((props: IPause) => {
     const dayTarget = stateDayTarget.dayTarget
     const [timeBrake, setTimeBrake] = useState(0)
-    useEffect(() => {
-        setTimeBrake(Math.round(props.arrBrake[dayTarget]?.time / 60))
+    const [arrBrake, setArrBrake] = useState<arrTimeGraph>([])
+    useLayoutEffect(() => {
+        setArrBrake(props.arrBrake)
         if (!props.arrBrake[dayTarget]) {
             setTimeBrake(0)
+        } else {
+            setTimeBrake(Math.round(arrBrake[dayTarget]?.time / 60))
         }
-    }, [props.arrBrake, dayTarget, timeBrake])
+    }, [props.arrBrake, dayTarget, timeBrake, arrBrake])
     return (
         <div className={styles.block}>
         <div className={styles.leftSide}>

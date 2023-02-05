@@ -16,7 +16,6 @@ import stateObservedWeek from "../../store/stateObservedWeek";
 export const Statistic = observer(() => {
     const weekTarget = stateObservedWeek.weekTarget
     const [dateHandicap, setDateHandicap] = useState(0)
-    const [dateFinish, setDateFinish] = useState()
     const nowDate = new Date()
     const [maxIntervalTime, setMaxIntervalTime] = useState(0)
     const nowDayWeek = nowDate.getDay()

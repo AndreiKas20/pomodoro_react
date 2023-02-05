@@ -6,8 +6,10 @@ import {typesTask} from "../../../../../../types/typesArrTask";
 import arrTaskStore from "../../../../../store/arrTaskStore";
 import {Input} from "../../../../../UI/Input";
 import {ModalDelete} from "../../../../../UI/ModalDelete";
+
 interface IItemTask {
     taskItem: typesTask
+
 }
 
 export function ItemTask({taskItem}: IItemTask) {
@@ -18,6 +20,7 @@ export function ItemTask({taskItem}: IItemTask) {
     const inputEditRef = useRef<HTMLDivElement>(null)
     const listDropRef = useRef<HTMLDivElement>(null)
     const [isOpenModal, setIsOpenModal] = useState(false)
+    const [animation, setAnimation] = useState({})
     const onClick = () => {
         setDropdown(!dropdown)
     }
@@ -68,7 +71,13 @@ export function ItemTask({taskItem}: IItemTask) {
         setIsOpenModal(true)
     }
     const modalDeleteTask = () => {
-        arrTaskStore.deleteTask(taskItem.id)
+        setIsOpenModal(false)
+        const timoutDel = setTimeout(() => {
+            arrTaskStore.deleteTask(taskItem.id)
+            console.log('time')
+        }, 993);
+        setAnimation({animation: 'closeItem .4s ease-in-out forwards'})
+        return () => clearTimeout(timoutDel)
     }
     useEffect(() => {
         document.addEventListener('click', handleClick)
@@ -76,11 +85,12 @@ export function ItemTask({taskItem}: IItemTask) {
             document.removeEventListener('click', handleClick)
         }
     })
+
     const closeModal = () => {
         setIsOpenModal(false)
     }
     return (
-        <li ref={listRef} className={styles.item}>
+        <li style={animation} ref={listRef} className={styles.item}>
             <div className={styles.leftSide}>
                 <span className={styles.count}>{taskItem.countPomodoro}</span>
                 {taskItem.textTask}
@@ -93,18 +103,17 @@ export function ItemTask({taskItem}: IItemTask) {
                 }
             </div>
             <ButtonDropdown onClick={onClick}/>
-                {
-                    dropdown &&
-                    <div className={styles.dropPosition} ref={listDropRef}>
-                        <DropdownMenu clickEdit={clickEdit} noActive={disabledMin} deleteTask={deleteTask}
-                                      clickMinus={clickMinus}
-                                      clickPlus={clickPlus}/>
-                    </div>
-                }
-
+            {
+                dropdown &&
+                <div className={styles.dropPosition} ref={listDropRef}>
+                    <DropdownMenu clickEdit={clickEdit} noActive={disabledMin} deleteTask={deleteTask}
+                                  clickMinus={clickMinus}
+                                  clickPlus={clickPlus}/>
+                </div>
+            }
             {
                 isOpenModal &&
-               <ModalDelete clickDelete={modalDeleteTask} clickClose={closeModal}/>
+                <ModalDelete clickDelete={modalDeleteTask} clickClose={closeModal}/>
             }
         </li>
     );

@@ -4,6 +4,17 @@
     max-height: 400px;
     background-color: var(--pinc79);
     z-index: 3;
+    animation: graph linear .3s ;
+}
+
+@keyframes graph {
+
+    0% {
+        transform: scale(.01);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .dailyPeriod {

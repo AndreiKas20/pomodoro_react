@@ -15,7 +15,6 @@ export const Column = observer(({value, timeOnePercent}: IColumn) => {
     const [colorBack, setColorBack] = useState<colorVar>()
     const column = Math.ceil(value.time / timeOnePercent)
     const [onTarget, setOnTarget] = useState(false)
-    const [disabled, setDisabled] = useState(false)
     const [colorT, setColorT] = useState('')
     const arrDay = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
     const day = stateDayTarget.dayTarget
@@ -41,14 +40,12 @@ export const Column = observer(({value, timeOnePercent}: IColumn) => {
         if (column === 0) {
             setHeightColumn(1)
             setColorBack('var(--greyC4)')
-            setDisabled(true)
         } else {
             setHeightColumn(column)
         }
     }, [column, onTarget, value.countDay, day])
     return (
         <div className={styles.btn} style={{height: `${heightColumn}%`, backgroundColor: `${colorBack}`}}>
-            <button disabled={disabled}></button>
             <button onClick={() => func(value.countDay)} style={{color: colorT}} className={styles.dailyPeriod}>{arrDay[value.countDay]}</button>
         </div>
     );

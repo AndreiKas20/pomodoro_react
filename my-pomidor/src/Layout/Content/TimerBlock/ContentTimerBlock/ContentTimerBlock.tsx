@@ -11,10 +11,16 @@ import {typeStateTimer} from "../../../../../types/typeStateTimer";
 import arrTaskStore from "../../../../store/arrTaskStore";
 import {generateRandomString} from "../../../../utils/getRandomString";
 import addNotification from 'react-push-notification';
+import settingTimerStore from "../../../../store/settingTimerStore";
 
 export const ContentTimerBlock = observer(() => {
-    const [second, setSecond] = useState(5)
-    const [minute, setMinute] = useState(0)
+    const timeOnePomidor = settingTimerStore.onePomidor
+    const timeOneShortBrake = settingTimerStore.oneBrake
+    const timeOneLongBrake = settingTimerStore.oneLongBrake
+    const countShortBrake = settingTimerStore.countShortBrake
+    const isAlert = settingTimerStore.alert
+    const [second, setSecond] = useState(0)
+    const [minute, setMinute] = useState(timeOnePomidor)
     const [target, setTarget] = useState(true)
     const [countBreak, setCountBreak] = useState(1)
     const [colorTimer, setColorTimer] = useState<styleBtn>({color: "var(--black)"})
@@ -44,24 +50,35 @@ export const ContentTimerBlock = observer(() => {
         saveLocal()
     }, [acceptArr])
 
+    useEffect(() => {
+        setMinute(timeOnePomidor)
+    }, [timeOnePomidor])
     const workTimeout = () => {
-        addNotification({
-            title: 'Таймер',
-            subtitle: 'Рабочее время таймера закончилось',
-            message: 'Рабочее время таймера закончилось начался перерыв',
-            duration: 5000,
-            native: true
-        });
+        if (isAlert) {
+            addNotification({
+                title: 'Таймер',
+                subtitle: 'Рабочее время таймера закончилось',
+                message: 'Рабочее время таймера закончилось, начался перерыв',
+                duration: 5000,
+                native: true
+            });
+        } else {
+            return
+        }
     };
 
     const brakeTimeout = () => {
-        addNotification({
-            title: 'Таймер',
-            subtitle: 'Время перерыва закончилось',
-            message: 'Время перерыва закончилось пора приступать к работе',
-            duration: 5000,
-            native: true
-        });
+        if (isAlert) {
+            addNotification({
+                title: 'Таймер',
+                subtitle: 'Время перерыва закончилось',
+                message: 'Время перерыва закончилось, пора приступать к работе',
+                duration: 5000,
+                native: true
+            });
+        } else {
+            return
+        }
     };
     const clickStart = () => {
         if (!arrStore) {
@@ -86,7 +103,7 @@ export const ContentTimerBlock = observer(() => {
         if (stateTimer === 'pauseInBreak' || stateTimer === 'break') {
             setStateTimer("start")
             setClickLeftBtn(true)
-            setSecond(6)
+            setSecond(timeOnePomidor)
             setMinute(0)
         }
         if (stateTimer === "pause") {
@@ -130,7 +147,7 @@ export const ContentTimerBlock = observer(() => {
                     setSecond(59)
                     setMinute(minute - 1)
                 }
-            }, 900);
+            }, 993);
             return () => clearInterval(timer);
         }
     }, [clickLeftBtn, second, minute, breakTime, arrStore])
@@ -144,8 +161,8 @@ export const ContentTimerBlock = observer(() => {
         if (!breakTime && targetBreak) {
             setStateTimer("start")
             brakeTimeout()
-            setMinute(0)
-            setSecond(6)
+            setMinute(timeOnePomidor)
+            setSecond(0)
             setTargetBreak(false)
         }
         if (stateTimer === 'pause') {
@@ -195,14 +212,14 @@ export const ContentTimerBlock = observer(() => {
                 if (arrStore.countPomodoro === 1) {
                     arrTaskStore.deleteTask(idTask)
                 }
-                if (countBreak === 4) {
-                    setMinute(0)
-                    setSecond(30)
+                if (countBreak === countShortBrake + 1) {
+                    setMinute(timeOneLongBrake)
+                    setSecond(0)
                     setCountBreak(1)
                 } else {
                     setCountBreak(countBreak + 1)
-                    setMinute(0)
-                    setSecond(5)
+                    setMinute(timeOneShortBrake)
+                    setSecond(0)
                 }
                 setTarget(false)
             }
@@ -214,8 +231,8 @@ export const ContentTimerBlock = observer(() => {
         }
         if (stateTimer === "stop") {
             setClickLeftBtn(false)
-            setSecond(6)
-            setMinute(0)
+            setSecond(0)
+            setMinute(timeOnePomidor)
             setBtnLeftName('Старт')
             setBtnRightName('Стоп')
             setColorTimer({color: 'var(--black)'})
@@ -229,7 +246,7 @@ export const ContentTimerBlock = observer(() => {
         }
         //-----Прокидываю состояние приложения в MobX
         stateTimerStore.changeState(stateTimer)
-    }, [stateTimer, targetBreak, breakTime, target, countBreak, count])
+    }, [stateTimer, targetBreak, breakTime, target, countBreak, count, countShortBrake])
     return (
         <div className={styles.block}>
             <Timer style={colorTimer} second={second} minute={minute}/>
