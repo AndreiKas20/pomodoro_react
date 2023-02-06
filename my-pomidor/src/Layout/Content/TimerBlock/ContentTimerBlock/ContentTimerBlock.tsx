@@ -147,7 +147,7 @@ export const ContentTimerBlock = observer(() => {
                     setSecond(59)
                     setMinute(minute - 1)
                 }
-            }, 200);
+            }, 993);
             return () => clearInterval(timer);
         }
     }, [clickLeftBtn, second, minute, breakTime, arrStore])
