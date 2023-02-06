@@ -10,18 +10,11 @@ interface ITimer {
 }
 
 export function Timer({second, minute, style}: ITimer) {
-    const props = useSpring({
-        from: { opacity: 0 },
-        to: { opacity: 1 },
-    })
     const [zeroSec, setZeroSec] = useState('')
     const [zeroMin, setZeroMin] = useState('')
     const [newSecond, setNewSecond] = useState(0)
     const [newMinute, setNewMinute] = useState(0)
-    useEffect(() => {
-        setNewMinute(minute)
-        setNewSecond(second)
-    }, [second, minute])
+
     useEffect(() => {
         if (second < 10) {
             setZeroSec('0')
@@ -33,6 +26,8 @@ export function Timer({second, minute, style}: ITimer) {
         } else {
             setZeroMin('')
         }
+        setNewMinute(minute)
+        setNewSecond(second)
     }, [second, minute])
     return (
         <span style={style} className={styles.span}>
