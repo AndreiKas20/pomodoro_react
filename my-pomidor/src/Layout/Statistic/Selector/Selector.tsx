@@ -34,6 +34,8 @@ export const Selector = observer(() => {
     const onClickOpen = () => {
         setIsOpen(!isOpen)
     }
+
+
     const onClickFirst = () => {
         setIsOpen(false)
         stateObservedWeek.changeWeekTarget(0)
@@ -62,7 +64,7 @@ export const Selector = observer(() => {
             </button>
             {
                 isOpen &&
-                <ul>
+                <ul className={styles.list}>
                     {
                         firstChoice &&
                         <li className={styles.item}>

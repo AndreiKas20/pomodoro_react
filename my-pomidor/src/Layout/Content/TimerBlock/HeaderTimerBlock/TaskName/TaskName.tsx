@@ -4,7 +4,6 @@ interface ITask {
   taskName: string
 }
 export function TaskName(props: ITask) {
-    //Пропсами передаю название таски
     return (
         <span className={styles.task}>{props.taskName}</span>
     );

@@ -1,5 +1,5 @@
 import {typesArrTaskComplete, typeTaskAdditionName} from "../../types/typesArrTask";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import arrTaskStore from "../store/arrTaskStore";
 
 export type timeGraph = {

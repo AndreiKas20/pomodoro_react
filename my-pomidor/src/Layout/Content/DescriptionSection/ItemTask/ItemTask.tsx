@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import styles from './itemtask.module.css'
-import {ButtonDropdown} from "../../../../../UI/ButtonDropdown";
-import {DropdownMenu} from "../../../../../UI/DropdownMenu";
-import {typesTask} from "../../../../../../types/typesArrTask";
-import arrTaskStore from "../../../../../store/arrTaskStore";
-import {Input} from "../../../../../UI/Input";
-import {ModalDelete} from "../../../../../UI/ModalDelete";
+import {ButtonDropdown} from "../../../../UI/ButtonDropdown";
+import {DropdownMenu} from "../../../../UI/DropdownMenu";
+import {typesTask} from "../../../../../types/typesArrTask";
+import arrTaskStore from "../../../../store/arrTaskStore";
+import {Input} from "../../../../UI/Input";
+import {ModalDelete} from "../../../../UI/ModalDelete";
 
 interface IItemTask {
     taskItem: typesTask

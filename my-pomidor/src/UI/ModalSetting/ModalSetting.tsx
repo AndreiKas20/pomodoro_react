@@ -104,11 +104,6 @@ export const ModalSetting = observer((props: IModalSetting) => {
                     <input placeholder={String(settingTimerStore.oneLongBrake)} min={'1'} type={'number'}
                            ref={oneLongBrake} className={styles.input}/>
                 </div>
-                {/*<div className={styles.blockInput}>*/}
-                {/*    <span className={styles.descriptionInput}>Длинных перерывов</span>*/}
-                {/*    <input placeholder={String(settingTimerStore.countLongBrake)} min={'0'} type={'number'}*/}
-                {/*           ref={countLongBrake} className={styles.input}/>*/}
-                {/*</div>*/}
                 <div className={styles.blockInput}>
                     <span className={styles.descriptionInput}>Количество коротких перерывов</span>
                     <input placeholder={String(settingTimerStore.countShortBrake)} min={'0'} type={'number'}

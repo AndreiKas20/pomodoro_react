@@ -1,9 +1,8 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import styles from './periodpausetime.module.css';
 import {arrTimeGraph} from "../../../hooks/useGetStatistic";
 import {observer} from "mobx-react-lite";
 import stateDayTarget from "../../../store/stateDayTarget";
-import {IconTimeBrake} from "../../../UI/Icons/IconTimeBrake";
 import {Icon} from "../../../UI/Icon";
 
 interface IPause {

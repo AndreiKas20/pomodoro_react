@@ -6,7 +6,6 @@ interface ITask {
 }
 
 export function TaskCount(props: ITask) {
-  //Пропсами передаю количество помидоров
   return (
     <span className={styles.count}>{props.text} {props.count}</span>
   );

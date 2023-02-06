@@ -3,8 +3,23 @@
     right: 80px;
     width: 370px;
     z-index: 5;
+    box-shadow: 0 10px 63px rgba(0, 0, 0, 0.07);
+}
+
+.list {
+    animation: listOpen .3s ease-in-out;
     background-color: var(--whiteF4);
-    box-shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+    transition: opacity .3s ease-in-out;
+}
+
+@keyframes listOpen {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+
 }
 
 .item {
@@ -16,6 +31,7 @@
     justify-content: space-between;
     padding: 20px 15px;
     width: 100%;
+    background-color: var(--whiteF4);
 }
 .item:after {
     content: '';

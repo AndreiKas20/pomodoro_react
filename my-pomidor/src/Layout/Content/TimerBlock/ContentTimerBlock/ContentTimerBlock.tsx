@@ -103,8 +103,8 @@ export const ContentTimerBlock = observer(() => {
         if (stateTimer === 'pauseInBreak' || stateTimer === 'break') {
             setStateTimer("start")
             setClickLeftBtn(true)
-            setSecond(timeOnePomidor)
-            setMinute(0)
+            setSecond(0)
+            setMinute(timeOnePomidor)
         }
         if (stateTimer === "pause") {
             setStateTimer("stop")
@@ -147,7 +147,7 @@ export const ContentTimerBlock = observer(() => {
                     setSecond(59)
                     setMinute(minute - 1)
                 }
-            }, 993);
+            }, 200);
             return () => clearInterval(timer);
         }
     }, [clickLeftBtn, second, minute, breakTime, arrStore])

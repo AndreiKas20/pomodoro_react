@@ -15,7 +15,6 @@ export const useHoursMinute = (minute: number) => {
         } else {
             let factor = 1
             for (let i = 0; i < 4; i++) {
-                //----Как это сделать на состояниях ??? ----- Это вообще нужно делать с помощью useState???------//
                 let factorMinute = highMinute * factor
                 let hour
                 let minute
@@ -34,6 +33,6 @@ export const useHoursMinute = (minute: number) => {
                 factor = factor - 0.25
             }
         }
-    }, [minute, highMinute, getMinute, arrText])
+    }, [minute, highMinute, getMinute])
     return arrText
 }
