@@ -43,8 +43,7 @@ export const ContentTimerBlock = observer(() => {
     const btnLeftHover: styleBtn = {backgroundColor: "var(--green41)", color: "var(--fullWhite)"}
     const [count, setCount] = useState(0)
     const saveLocal = () => {
-        localStorage.acceptArr = JSON.stringify(acceptArr)
-        console.log('save', JSON.parse(localStorage.acceptArr))
+            localStorage.acceptArr = JSON.stringify(acceptArr)
     }
     useEffect(() => {
         saveLocal()
@@ -197,7 +196,6 @@ export const ContentTimerBlock = observer(() => {
             if (target) {
                 setCount(count + 1)
                 arrTaskStore.editAccept(arrStore.id, count)
-                console.log('count timer', count)
                 arrTaskStore.countEditMinus(arrStore.id, arrStore.countPomodoro)
                 arrTaskStore.acceptTask(idTask, {
                     ...arrStore,

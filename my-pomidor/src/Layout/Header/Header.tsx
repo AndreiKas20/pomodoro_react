@@ -14,7 +14,6 @@ export const Header = observer(() => {
     const stateTheme = localStorage.getItem('theme')
     const [openSetting, setOpenSetting] = useState(false)
     const setDark = () => {
-        console.log('check', check.current?.checked)
         if (!check.current?.checked) {
             setTheme('dark')
             setStartChecked(false)

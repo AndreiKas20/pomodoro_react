@@ -5,7 +5,9 @@ import './layout.module.css'
 import {Statistic} from "./Statistic";
 import {Route, Routes} from "react-router-dom";
 
+
 export function Layout() {
+
     return (
         <div className='layout' >
             <Header/>

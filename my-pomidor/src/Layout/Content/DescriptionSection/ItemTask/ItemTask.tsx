@@ -74,7 +74,6 @@ export function ItemTask({taskItem}: IItemTask) {
         setIsOpenModal(false)
         const timoutDel = setTimeout(() => {
             arrTaskStore.deleteTask(taskItem.id)
-            console.log('time')
         }, 993);
         setAnimation({animation: 'closeItem .4s ease-in-out forwards'})
         return () => clearTimeout(timoutDel)

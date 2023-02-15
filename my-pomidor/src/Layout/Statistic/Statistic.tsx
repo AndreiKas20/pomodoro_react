@@ -28,7 +28,7 @@ export const Statistic = observer(() => {
     const arrText = useHoursMinute(maxIntervalTime)
     const acceptArr = arrTaskStore.acceptArr
     useEffect(() => {
-        arrTaskStore.addLocalStorage(JSON.parse( localStorage.acceptArr))
+            arrTaskStore.addLocalStorage(JSON.parse(localStorage.acceptArr))
     },[])
     useEffect(() => {
         if (weekTarget === 0) {

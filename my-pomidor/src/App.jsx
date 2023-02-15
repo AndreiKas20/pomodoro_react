@@ -9,7 +9,7 @@ import React, {useLayoutEffect} from "react";
 function App() {
     console.log('render App')
     useLayoutEffect(() => {
-        arrTaskStore.addLocalStorage(JSON.parse(localStorage.acceptArr))
+        localStorage.acceptArr? arrTaskStore.addLocalStorage(JSON.parse(localStorage.acceptArr)) : console.log('first local')
     }, [])
     return (
         <BrowserRouter>

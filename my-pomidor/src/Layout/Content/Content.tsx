@@ -4,7 +4,6 @@ import {TimerBlock} from "./TimerBlock";
 import styles from './content.module.css'
 
 export function Content() {
-    console.log('render Content')
     return (
         <div className={styles.content}>
             <div className={styles.leftBlock}>
