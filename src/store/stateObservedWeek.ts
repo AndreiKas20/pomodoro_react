@@ -1,0 +1,1 @@
+import {makeAutoObservable} from "mobx";class StateObservedWeek {    weekTarget = 0    constructor() {        makeAutoObservable(this)    }    changeWeekTarget(newValue: number) {        this.weekTarget = newValue    }}export default new StateObservedWeek()

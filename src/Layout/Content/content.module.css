@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 80px;
+    /*background-color: var(--fullWhite);*/
+    background-repeat: repeat;
+}
+
+.leftBlock {
+    max-width: 508px;
+}
+
+.rightBlock {
+    min-width: 730px;
+}

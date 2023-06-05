@@ -1,0 +1,30 @@
+.block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.blockTask {
+    margin-bottom: 30px;
+}
+
+.blockBtn {
+    display: flex;
+    justify-content: center;
+}
+
+.btnLeft{
+    margin-right: 25px;
+}
+
+.btnPlus {
+    position: absolute;
+    right: -100px;
+    top: 70px;
+}
+
+.timerBlock {
+    position:relative;
+    top: 0;
+    left: 0;
+}

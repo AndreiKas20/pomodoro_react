@@ -1,0 +1,37 @@
+.btn {
+    position: relative;
+    width: 75px;
+    max-height: 400px;
+    background-color: var(--pinc79);
+    z-index: 3;
+    animation: graph linear .3s ;
+}
+
+@keyframes graph {
+
+    0% {
+        transform: scale(.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dailyPeriod {
+    position: absolute;
+    bottom: -40px;
+    width: 75px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--grey99);
+}
+
+.dailyBlock {
+    padding: 11px 90px 11px 0;
+    align-items: baseline;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--greyEC);
+}
